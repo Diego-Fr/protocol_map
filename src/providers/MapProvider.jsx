@@ -9,10 +9,10 @@ const MapContext = createContext(null);
 export function MapProvider({children}){
     const mapRef = useRef(null)
     const [map, setMap] = useState(null)
-
+    const tileRef = useRef(null)
     const sliderOptions = useSelector(state=>state.slider)
 
-    let tile = undefined
+    
 
     useEffect(()=>{
         if (!mapRef.current) return;
@@ -23,17 +23,6 @@ export function MapProvider({children}){
         }).addTo(map);
 
         setMap(map)
-
-        tile = L.tileLayer.wms('https://geodados.daee.sp.gov.br/geoserver/ows', {
-            layers: 'protocol_indicators_subugrhi',
-            format: 'image/png',
-            transparent: true,
-            tiled: false,
-            srs: 'EPSG:4326',
-            version: "1.1.1",
-            styles: '',
-            CQL_FILTER: 'year=2025 and month=6'
-        }).addTo(map)
 
         map.createPane('sidebarPane');
         let myPane = map.getPane('sidebarPane')
@@ -49,24 +38,25 @@ export function MapProvider({children}){
 
     useEffect(_=>{
         
-        if(tile){
-            tile.remove()
-        }
-        console.log(sliderOptions);
-
-        if(sliderOptions.year && sliderOptions.month){
-            tile = L.tileLayer.wms('https://geodados.daee.sp.gov.br/geoserver/ows', {
-            layers: 'protocol_indicators_subugrhi',
-            format: 'image/png',
-            transparent: true,
-            tiled: false,
-            srs: 'EPSG:4326',
-            version: "1.1.1",
-            styles: '',
-            CQL_FILTER: `year=${sliderOptions.year} and month=${sliderOptions.month}`
-        }).addTo(map)
-        }
-        
+        //nao existe, criar caso o sliderOptions tenha ano e mes
+        if(!tileRef.current){
+            if(sliderOptions.year && sliderOptions.month){
+                tileRef.current = L.tileLayer.wms('https://geodados.daee.sp.gov.br/geoserver/ows', {
+                    layers: 'protocol_indicators_subugrhi',
+                    format: 'image/png',
+                    transparent: true,
+                    version: "1.1.1",
+                    styles: '',
+                    CQL_FILTER: `year=${sliderOptions.year} and month=${sliderOptions.month}`
+                }).addTo(map)
+            }
+            
+        } else {
+            //ja existe, atualizando parametros com novo ano e mes
+            tileRef.current.setParams({
+                CQL_FILTER: `year=${sliderOptions.year} and month=${sliderOptions.month}`
+            });
+        }        
         
     },[sliderOptions])
 
