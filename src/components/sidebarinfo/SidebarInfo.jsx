@@ -5,6 +5,8 @@ import styles from './Tooltip.module.scss'
 import { useMap } from '@/providers/MapProvider'
 import ReactDOM from "react-dom";
 import { useSelector } from 'react-redux';
+import IndicatorsList from './components/IndicatorsList/IndicatorsList';
+import ActionsList from './components/ActionsList/ActionsList';
 
 const SidebarInfo = () =>{
     const containerRef = useRef(null)
@@ -28,9 +30,7 @@ const SidebarInfo = () =>{
         };
     },[map])
 
-    useEffect(_=>{
-        console.log(sidebarOptions.classification);
-        
+    useEffect(_=>{        
         switch(sidebarOptions.classification){
             case 0: 
                 setColoByKlass('oklch(84.1% 0.238 128.85)')
@@ -54,7 +54,8 @@ const SidebarInfo = () =>{
             <div className={`font-semibold text-white text-center`} style={{backgroundColor:colorByClass}}>Clasificação: Alerta</div>
             <div className={`${styles.title} text-stone-800 font-semibold text-3xl pt-3 pl-4 pb-1`}>{sidebarOptions.obj_name}</div>
             <div className={`${styles.subtitle} text-stone-600 font-semibold pl-4 pb-3`}>Código: {sidebarOptions.obj_cod}</div>
-            
+            <IndicatorsList/>
+            <ActionsList/>
         </div>
     )
 }

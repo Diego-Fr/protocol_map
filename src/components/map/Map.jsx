@@ -64,11 +64,12 @@ const Map = () =>{
         if(!map) return ;
 
         const handleClick = async (e) =>{
+            
             try{
                 let data = await getPointInformation(map, e.latlng, sliderOptions.year, sliderOptions.month)
                 if(data.features.length > 0){
-                    let {no_subugrh, no_ugrhi, n_subugrhi, n_ugrhi, classification} = data.features[0].properties
-                    dispatch(setContent({obj_name: no_subugrh, obj_cod: n_subugrhi, classification}))
+                    let {no_subugrh, no_ugrhi, n_subugrhi, n_ugrhi, classification, spi_6, ndvi, dry_d, spei_6} = data.features[0].properties
+                    dispatch(setContent({obj_name: no_subugrh, obj_cod: n_subugrhi, classification, indicators: {spi_6, ndvi, dry_d, spei_6}}))
                     dispatch(setShow(true))
                     showHighlight(data.features[0])
                 } else {
