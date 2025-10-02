@@ -1,0 +1,23 @@
+.container{
+    z-index: 1000;
+    background-color: white;
+    width: 1000px;
+    height: 5px;
+    position: relative;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    .control{
+        background-color: black;
+        position: absolute;
+        border-radius: 50%;
+        top: 100%;
+    }
+
+    .yearLabels{
+        display: flex;
+        justify-content: space-between;
+        transform: translateY(-100%);
+    }
+}
