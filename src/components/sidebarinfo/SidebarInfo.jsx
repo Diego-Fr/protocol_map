@@ -31,7 +31,9 @@ const SidebarInfo = () =>{
     },[map])
 
     useEffect(_=>{        
-        switch(sidebarOptions.classification){
+        console.log(sidebarOptions);
+        
+        switch(sidebarOptions.general_status){
             case 0: 
                 setColoByKlass('oklch(84.1% 0.238 128.85)')
                 break;
@@ -51,7 +53,7 @@ const SidebarInfo = () =>{
 
     return (
         <div ref={containerRef} className={`${styles.container} ${sidebarOptions.show ? styles.show : ''}`}>
-            <div className={`font-semibold text-white text-center`} style={{backgroundColor:colorByClass}}>Clasificação: Alerta</div>
+            {/* <div className={`font-semibold text-white text-center`} style={{backgroundColor:colorByClass}}>Clasificação: Alerta</div> */}
             <div className={`${styles.title} text-stone-800 font-semibold text-3xl pt-3 pl-4 pb-1`}>{sidebarOptions.obj_name}</div>
             <div className={`${styles.subtitle} text-stone-600 font-semibold pl-4 pb-3`}>Código: {sidebarOptions.obj_cod}</div>
             <IndicatorsList/>

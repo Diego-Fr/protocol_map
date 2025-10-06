@@ -8,9 +8,7 @@ const checkSPIClassification = (spi) =>{
     return obj
 }
 
-const checkIndicatorClassification = (indicator, value)=>{
-    console.log(indicator, value);
-    
+const checkIndicatorClassification = (indicator, value)=>{    
     switch(indicator) {
         case 'spi_6': 
             return checkSPIClassification(value)
@@ -19,4 +17,53 @@ const checkIndicatorClassification = (indicator, value)=>{
     }
 }
 
-module.exports = {checkIndicatorClassification}
+const t = (text) =>{
+    switch(text){
+        case 'dry':
+            return 'duração seca'
+        case 'spi_6':
+            return 'SPI-6'
+        case 'spei_6':
+            return 'SPEI-6'
+        case 'ndvi':
+            return 'NDVI'
+        case 'rain_anomaly':
+            return 'anomalia de chuva'
+        default:
+            return text
+    }
+}
+
+const classificationName = (number) =>{
+    switch(number){
+        case '0':
+            return 'normal'
+        case '1':
+            return 'atenção'
+        case '2':
+            return 'alerta'
+        case '3':
+            return 'crítico'
+        case '4':
+            return 'emergência'
+        default:
+            return 'Sem nome para classificação ' + number
+    }
+}
+
+const colorByClassification = (text) =>{
+    switch(text){
+        case '0':
+            return 'rgb(173, 255, 47)'
+        case '1':
+            return 'rgb(255, 255, 0)'
+        case '2':
+            return 'rgb(255, 165, 0)'
+        case '3':
+            return 'rgb(255, 0, 0)'
+        case '4':
+            return 'rgb(148, 0, 211)'
+    }
+}
+
+module.exports = {checkIndicatorClassification,t,classificationName,colorByClassification}

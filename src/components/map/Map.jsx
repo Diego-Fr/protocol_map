@@ -23,6 +23,7 @@ const Map = () =>{
     const {map, mapRef} = useMap() || {}
     const dispatch = useDispatch()
     const sliderOptions = useSelector(state=>state.slider)
+    const mapOptions = useSelector(state=>state.map)
     
     
     let featureGroup = null
@@ -68,8 +69,10 @@ const Map = () =>{
             try{
                 let data = await getPointInformation(map, e.latlng, sliderOptions.year, sliderOptions.month)
                 if(data.features.length > 0){
-                    let {no_subugrh, no_ugrhi, n_subugrhi, n_ugrhi, classification, spi_6, ndvi, dry_d, spei_6} = data.features[0].properties
-                    dispatch(setContent({obj_name: no_subugrh, obj_cod: n_subugrhi, classification, indicators: {spi_6, ndvi, dry_d, spei_6}}))
+                    console.log(data.features[0].properties);
+                    
+                    let {no_subugrh, no_ugrhi, n_subugrhi, n_ugrhi, general_status, spi_6, ndvi, dry_d, spei_6, indicator_statuses} = data.features[0].properties
+                    dispatch(setContent({obj_name: no_subugrh, obj_cod: n_subugrhi, general_status, indicator_statuses: JSON.parse(indicator_statuses), indicators: {spi_6, ndvi, dry_d, spei_6}}))
                     dispatch(setShow(true))
                     showHighlight(data.features[0])
                 } else {
@@ -124,14 +127,18 @@ const Map = () =>{
         
     },[features,map])
 
+    useEffect(_=>{        
+        if(!mapOptions.userLocation.lat) return;
+        L.marker([mapOptions.userLocation.lat, mapOptions.userLocation.lng]).addTo(map)
+    }, [mapOptions])
+
 
     return <div ref={mapRef} style={{
-        position: "relative", // importantíssimo para que os panes se posicionem
-        width: "100%",
-        height: "100vh",
-    }}>
-        
-    </div>
+                    position: "relative", // importantíssimo para que os panes se posicionem
+                    width: "100%",
+                    height: "100vh",
+                }}>
+            </div>
 }
 
 export default Map

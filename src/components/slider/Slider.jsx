@@ -21,7 +21,7 @@ const Slider = () =>{
 
     const radius = 10;
     const buffer = 15;
-    const months = 12 * 24 + 8
+    const months = 2
 
     const [sliderOptions, setSliderOptions] = useState({
         selectedYear: 2025,
@@ -76,7 +76,7 @@ const Slider = () =>{
     }
 
     const getDateFromMonthsNumber = number =>{
-        return addMonths(new Date(2000, 0, 1), number)
+        return addMonths(new Date(2025, 5, 1), number)
     }
     
 
@@ -130,7 +130,7 @@ const Slider = () =>{
                     {labels.map(label=> <div>{label}</div> )}
                 </div> */}
             </div>
-            <div className={`${styles.currentDate} font-semibold text-stone-700`}>{sliderOptions.selectedYear}/{sliderOptions.selectedMonth}</div>
+            <div className={`${styles.currentDate} font-semibold text-stone-700`}>{sliderOptions.selectedYear}-{sliderOptions.selectedMonth.toFixed(0).padStart(2, 0)}</div>
             
         </div>
     )

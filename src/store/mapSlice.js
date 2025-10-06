@@ -2,13 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const mapSlice = createSlice({
   name: "counter",
-  initialState: { map: undefined },
+  initialState: { userLocation: {lat: null, lng: null} },
   reducers: {
-    setMap: (state, action) =>{
-        state.map = action.payload
+    setUserLocation: (state, {payload: { lat, lng }}) =>{
+        state.userLocation.lat = lat
+        state.userLocation.lng = lng
     }
   }
 });
 
-export const { setMap } = mapSlice.actions;
+export const { setUserLocation } = mapSlice.actions;
 export default mapSlice.reducer;
