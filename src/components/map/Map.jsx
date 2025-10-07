@@ -13,18 +13,20 @@ import { SearchAddressControl } from "./_SearchAddress";
 import { useMap } from "@/providers/MapProvider";
 import { setContent, setLocation, setShow } from "@/store/sidebarSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { setDate } from "@/store/sliderSlice";
 
 const Map = () =>{
 
     // const mapRef = useRef(null)
     const inputAddressRef = useRef(null)
-    const [inputAdressValue, setInputAdressValue] = useState('campinas')
+    const [inputAdressValue, setInputAdressValue] = useState('')
     const [features, setFeatures] = useState([])
     const {map, mapRef} = useMap() || {}
     const dispatch = useDispatch()
     const sliderOptions = useSelector(state=>state.slider)
     const mapOptions = useSelector(state=>state.map)
     const userOptions = useSelector(state=>state.user)
+    const [firstLoad, setFirstLoad] = useState(false)
     
     
     let featureGroup = null
@@ -35,6 +37,7 @@ const Map = () =>{
         inputAddressRef.current.value = inputAdressValue
         inputAddressRef.current.onkeypress = (e) => inputAdressKeyPress(e);
         inputAddressRef.current.placeholder = 'Pesquisar região'
+        inputAddressRef.current.classList.add(styles.searchInput)
         map.addControl(new SearchAddressControl({input: inputAddressRef.current}))
     }
 
@@ -119,6 +122,13 @@ const Map = () =>{
         map.setView(userOptions.location, 12)
 
     }, [userOptions])
+
+    useEffect(_=>{
+        if(!firstLoad){
+            dispatch(setDate({year: 2025, month: 8}))
+            setFirstLoad(true)
+        }
+    }, [map])
 
 
     return <div ref={mapRef} style={{

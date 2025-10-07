@@ -15,6 +15,8 @@ const SearchAddressControl = L.Control.extend({
     div.style.padding = "8px";
     div.style.borderRadius = "8px";
     div.style.boxShadow = "0 2px 6px rgba(0,0,0,0.2)";
+    div.style.width = '20vw'
+    div.style.height = '40px'
 
     // conteúdo HTML do control
     div.appendChild(this.options.input);

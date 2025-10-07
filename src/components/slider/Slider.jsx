@@ -18,6 +18,7 @@ const Slider = () =>{
     const [following, setFollowing] = useState(false);
     const selectedMonth = useRef(null)
     const [block, setBlock] = useState(false)
+    const [firstLoad, setFirstLoad] = useState(false)
 
     const radius = 10;
     const buffer = 15;
@@ -25,11 +26,10 @@ const Slider = () =>{
 
     const [sliderOptions, setSliderOptions] = useState({
         selectedYear: 2025,
-        selectedMonth: 6
+        selectedMonth: 8
     })
 
 
-    let labels = ['2000','2005','2010', '2015', '2020', '2025']
 
     
 
@@ -101,7 +101,7 @@ const Slider = () =>{
 
         const handleMouseUp = () => {
             if(following){
-                console.log(selectedMonth.current);
+                
                 
                 setFollowing(false); 
                 let date = getDateFromMonthsNumber(selectedMonth.current)
@@ -120,11 +120,20 @@ const Slider = () =>{
         };
     }, [following])
 
+    useEffect(_=>{
+        if(!firstLoad){
+            console.log('tentnado');
+            
+            setSliderOptions(state => ({...state, selectedYear: 2025,selectedMonth:8}))
+            setFirstLoad(true)
+        }
+    },[map])
+
 
     return (
         <div className={styles.wrapper} ref={wrapperRef}>
-            <div ref={containerRef} className={styles.container} style={{height:2}} onMouseDown={handleBarMouseDown}>
-                <div className={styles.control} ref={controlRef} onMouseDown={handleCircleClick} style={{left: position.x-radius, width: radius*2, height: radius*2, transform: `translateY(-${radius+1}px)` }}></div>
+            <div ref={containerRef} className={styles.container} style={{height:10}} onMouseDown={handleBarMouseDown}>
+                <div className={styles.control} ref={controlRef} onMouseDown={handleCircleClick} style={{left: position.x-radius, width: radius*2, height: radius*2, transform: `translateY(-${radius+5}px)` }}></div>
 
                 {/* <div className={styles.yearLabels}>
                     {labels.map(label=> <div>{label}</div> )}

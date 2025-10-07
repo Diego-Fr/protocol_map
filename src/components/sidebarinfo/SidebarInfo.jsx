@@ -58,7 +58,8 @@ const SidebarInfo = () =>{
     },[sidebarOptions])
 
     useEffect(_=>{
-        if(sidebarOptions.location){
+
+        if(sidebarOptions.location?.lat != null && sidebarOptions.location?.lat != undefined){
             let handler = async () =>{
                 try{
                 
