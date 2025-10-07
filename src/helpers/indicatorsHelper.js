@@ -51,7 +51,21 @@ const classificationName = (number) =>{
     }
 }
 
-const colorByClassification = (text) =>{
+const colorByClassificationName = (text) =>{
+    switch(text){
+        case 'normal':
+            return 'rgb(173, 255, 47)'
+        case 'atenção':
+            return 'rgb(255, 255, 0)'
+        case 'alerta':
+            return 'rgb(255, 165, 0)'
+        case 'crítico':
+            return 'rgb(255, 0, 0)'
+        case 'emergência':
+            return 'rgb(148, 0, 211)'
+    }
+}
+const colorByClassification = (text) =>{    
     switch(text){
         case '0':
             return 'rgb(173, 255, 47)'
@@ -66,4 +80,4 @@ const colorByClassification = (text) =>{
     }
 }
 
-module.exports = {checkIndicatorClassification,t,classificationName,colorByClassification}
+module.exports = {checkIndicatorClassification,t,classificationName,colorByClassification, colorByClassificationName}

@@ -46,4 +46,8 @@ const searchAddress = async query => {
   }
 }
 
-module.exports = {loadSubugrhiLimit,getPointInformation,searchAddress}
+const myLocationIcon = className =>{
+  return L.divIcon({className});
+}
+
+module.exports = {loadSubugrhiLimit,getPointInformation,searchAddress, myLocationIcon}

@@ -4,6 +4,7 @@ import { MapProvider } from "@/providers/MapProvider";
 import SidebarInfo from "@/components/sidebarinfo/SidebarInfo";
 import Slider from "@/components/slider/Slider";
 import LocationButton from "@/components/map/components/locationButton/LocationButton";
+import Legend from "@/components/legend/Legend";
 
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
         <SidebarInfo/>
         <Slider/>
         <LocationButton/>
+        <Legend/>
       </MapProvider>
     </div>
     // <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">

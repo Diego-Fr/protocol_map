@@ -1,9 +1,9 @@
 'use client'
 
 import { useMap } from "@/providers/MapProvider"
-import { setUserLocation } from "@/store/mapSlice"
+import { setLocation } from "@/store/userSlice"
+import { setLocation as setLocationSidebar } from "@/store/sidebarSlice"
 import { useEffect, useRef, useState } from "react"
-import { createPortal } from "react-dom"
 import { useDispatch } from "react-redux"
 
 const LocationButton = () =>{
@@ -76,7 +76,8 @@ const LocationButton = () =>{
 
     useEffect(_=>{
         
-        dispatch(setUserLocation(coords))
+        dispatch(setLocation(coords))
+        dispatch(setLocationSidebar(coords))
         
     }, [coords])
 

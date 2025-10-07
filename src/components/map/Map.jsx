@@ -7,11 +7,11 @@ import "leaflet-control-geocoder";
 import "leaflet-control-geocoder/dist/Control.Geocoder.css";
 import "leaflet/dist/leaflet.css";
 import styles from './Map.module.scss'
-import { loadSubugrhiLimit, getPointInformation, searchAddress } from "./mapUtils";
+import { loadSubugrhiLimit, getPointInformation, searchAddress, myLocationIcon } from "./mapUtils";
 import axios from "axios";
 import { SearchAddressControl } from "./_SearchAddress";
 import { useMap } from "@/providers/MapProvider";
-import { setContent, setShow } from "@/store/sidebarSlice";
+import { setContent, setLocation, setShow } from "@/store/sidebarSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const Map = () =>{
@@ -24,6 +24,7 @@ const Map = () =>{
     const dispatch = useDispatch()
     const sliderOptions = useSelector(state=>state.slider)
     const mapOptions = useSelector(state=>state.map)
+    const userOptions = useSelector(state=>state.user)
     
     
     let featureGroup = null
@@ -64,28 +65,8 @@ const Map = () =>{
     useEffect(_=>{
         if(!map) return ;
 
-        const handleClick = async (e) =>{
-            
-            try{
-                let data = await getPointInformation(map, e.latlng, sliderOptions.year, sliderOptions.month)
-                if(data.features.length > 0){
-                    console.log(data.features[0].properties);
-                    
-                    let {no_subugrh, no_ugrhi, n_subugrhi, n_ugrhi, general_status, spi_6, ndvi, dry_d, spei_6, indicator_statuses} = data.features[0].properties
-                    dispatch(setContent({obj_name: no_subugrh, obj_cod: n_subugrhi, general_status, indicator_statuses: JSON.parse(indicator_statuses), indicators: {spi_6, ndvi, dry_d, spei_6}}))
-                    dispatch(setShow(true))
-                    showHighlight(data.features[0])
-                } else {
-                    dispatch(setShow(false))
-                    if(featureGroupHighlight){
-                        featureGroupHighlight.clearLayers()
-                    }
-                    
-                }
-            } catch (e){
-                console.log('Erro ao buscar dados do ponto', e);
-            }
-            
+        const handleClick = async (e) =>{            
+            dispatch(setLocation({lat: e.latlng.lat, lng: e.latlng.lng}))
         }
 
         map.on('click', handleClick)
@@ -127,10 +108,17 @@ const Map = () =>{
         
     },[features,map])
 
-    useEffect(_=>{        
-        if(!mapOptions.userLocation.lat) return;
-        L.marker([mapOptions.userLocation.lat, mapOptions.userLocation.lng]).addTo(map)
-    }, [mapOptions])
+    useEffect(_=>{   
+             
+        if(!userOptions.location?.lat) return;
+        
+        let icon = myLocationIcon(styles.myLocationIcon)
+
+        L.marker([userOptions.location.lat, userOptions.location.lng], {icon}).addTo(map)
+
+        map.setView(userOptions.location, 12)
+
+    }, [userOptions])
 
 
     return <div ref={mapRef} style={{
