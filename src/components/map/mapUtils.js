@@ -36,11 +36,40 @@ const getPointInformation = async (map,latLng,year, month) =>{
     return response.data
 }
 
+
+const getPointCityInformation = async (map,latLng) =>{
+    const bbox = map.getBounds().toBBoxString(); // bbox atual do mapa
+    const size = map.getSize(); // {x: width, y: height}
+    const point = map.latLngToContainerPoint(latLng); // ponto clicado em pixels
+
+    const url = new URL('https://geodados.daee.sp.gov.br/geoserver/ows');
+    
+    url.search = new URLSearchParams({
+        service: 'WMS',
+        version: '1.1.1',
+        request: 'GetFeatureInfo',
+        layers: 'municipios_sp',
+        query_layers: 'municipios_sp',
+        styles: '',
+        bbox: bbox,
+        width: size.x,
+        height: size.y,
+        x: Math.round(point.x),
+        y: Math.round(point.y),
+        info_format: 'application/json',
+        srs: 'EPSG:4326'
+    }).toString();
+
+    let response = await axios.get(url)
+    
+    return response.data
+}
+
 const searchAddress = async query => {
   const url = `https://nominatim.openstreetmap.org/search?format=json&q=${query}`;
   const results = await axios.get(url)
 
-  if (results?.data.length > 0) {
+  if (results?.data.length > 0) {    
     const { lat, lon, display_name } = results.data[0];
     return {lat, lon, display_name}
   }
@@ -50,4 +79,4 @@ const myLocationIcon = className =>{
   return L.divIcon({className});
 }
 
-module.exports = {loadSubugrhiLimit,getPointInformation,searchAddress, myLocationIcon}
+module.exports = {loadSubugrhiLimit,getPointInformation,searchAddress, myLocationIcon, getPointCityInformation}

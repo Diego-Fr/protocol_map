@@ -23,7 +23,7 @@ const ActionsList = () =>{
         <div className={`pb-1 mb-2 text-center text-slate-500 ${styles.title}`}>Medidas de Contingência</div>
         {actions.length > 0 
             ?
-            actions.map(action=> <div className={styles.item}>{action.split('-')[1]}</div> )
+            actions.map((action,index)=> <div key={index} className={styles.item}>{action.split('-')[1]}</div> )
             :
             <div className={styles.item}>Nenhuma medida de contingência aplicada</div>
         }

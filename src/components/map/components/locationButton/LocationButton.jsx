@@ -25,7 +25,6 @@ const LocationButton = () =>{
             },
 
             onAdd: function (map) {
-                console.log(this.options.input);
                 
                 const div = L.DomUtil.create('div')
 
@@ -69,7 +68,7 @@ const LocationButton = () =>{
             (err) => {
                 // setError(err.message)
             },
-            { enableHighAccuracy: true, timeout: 5000 }
+            { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
         )
         
     }
@@ -82,7 +81,7 @@ const LocationButton = () =>{
     }, [coords])
 
     return (
-        <button ref={buttonRef} onClick={clickHandler}>test</button>
+        <button ref={buttonRef} onClick={clickHandler}>Localizar</button>
     )
 }
 

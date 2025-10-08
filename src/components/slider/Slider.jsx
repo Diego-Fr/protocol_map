@@ -22,7 +22,7 @@ const Slider = () =>{
 
     const radius = 10;
     const buffer = 15;
-    const months = 2
+    const months = 7
 
     const [sliderOptions, setSliderOptions] = useState({
         selectedYear: 2025,
@@ -76,7 +76,7 @@ const Slider = () =>{
     }
 
     const getDateFromMonthsNumber = number =>{
-        return addMonths(new Date(2025, 5, 1), number)
+        return addMonths(new Date(2025, 0, 1), number)
     }
     
 
@@ -120,10 +120,9 @@ const Slider = () =>{
         };
     }, [following])
 
+    //primeira carregada, selecionando dado de mes especifico
     useEffect(_=>{
-        if(!firstLoad){
-            console.log('tentnado');
-            
+        if(!firstLoad){            
             setSliderOptions(state => ({...state, selectedYear: 2025,selectedMonth:8}))
             setFirstLoad(true)
         }
