@@ -44,7 +44,8 @@ const Slider = () =>{
     const updateCursorPosition = e =>{
         const rect = containerRef.current.getBoundingClientRect();
         let step = rect.width/ months
-        let x = e.clientX - rect.left;
+        let x = Math.abs(e.clientX - rect.right);
+        
 
         const min = 0;
         const max = rect.width;
@@ -75,8 +76,8 @@ const Slider = () =>{
         dispatch(setDate({year: date.getFullYear(), month: date.getMonth() +1}))
     }
 
-    const getDateFromMonthsNumber = number =>{
-        return addMonths(new Date(2025, 0, 1), number)
+    const getDateFromMonthsNumber = number =>{        
+        return addMonths(new Date(2025, 0, 1), months - number)
     }
     
 
@@ -132,7 +133,7 @@ const Slider = () =>{
     return (
         <div className={styles.wrapper} ref={wrapperRef}>
             <div ref={containerRef} className={styles.container} style={{height:10}} onMouseDown={handleBarMouseDown}>
-                <div className={styles.control} ref={controlRef} onMouseDown={handleCircleClick} style={{left: position.x-radius, width: radius*2, height: radius*2, transform: `translateY(-${radius+5}px)` }}></div>
+                <div className={styles.control} ref={controlRef} onMouseDown={handleCircleClick} style={{right: position.x-radius, width: radius*2, height: radius*2, transform: `translateY(-${radius+5}px)` }}></div>
 
                 {/* <div className={styles.yearLabels}>
                     {labels.map(label=> <div>{label}</div> )}
