@@ -6,5 +6,10 @@ services:
     container_name: protocol_map
     ports:
       - "40000:3000" # host:container
+    networks:
+      - protocol-map-network
     environment:
       - NODE_ENV=production
+networks:
+  protocol-map-network:
+    driver: bridge
