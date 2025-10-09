@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  app:
+    build: ./
+    container_name: protocol_map
+    ports:
+      - "40000:3000" # host:container
+    environment:
+      - NODE_ENV=production
