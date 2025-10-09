@@ -29,6 +29,8 @@ const t = (text) =>{
             return 'NDVI'
         case 'rain_anomaly':
             return 'anomalia de chuva'
+        case 'dam_vol':
+            return 'volume reservatório'
         default:
             return text
     }
