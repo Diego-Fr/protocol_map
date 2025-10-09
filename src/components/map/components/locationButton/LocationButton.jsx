@@ -5,6 +5,7 @@ import { setLocation } from "@/store/userSlice"
 import { setLocation as setLocationSidebar } from "@/store/sidebarSlice"
 import { useEffect, useRef, useState } from "react"
 import { useDispatch } from "react-redux"
+import axios from "axios"
 
 const LocationButton = () =>{
 
@@ -51,29 +52,34 @@ const LocationButton = () =>{
         
     }, [map])
 
-    const clickHandler = () =>{
+    const clickHandler = async () =>{
+        console.log('clck',navigator);
+        
         if (!navigator.geolocation) {
-            setError('Geolocalização não suportada pelo navegador')
+            console.log('Geolocalização não suportada pelo navegador')
             return
-            }
-
-            navigator.geolocation.getCurrentPosition(
+        }        
+        
+        navigator.geolocation.getCurrentPosition(
             (position) => {
+                console.log(position);
+                
                 setCoords({
                     lat: position.coords.latitude,
                     lng: position.coords.longitude,
                 })
-                // setError(null)
             },
             (err) => {
-                // setError(err.message)
+                console.log(err);
+                
             },
-            { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+            { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
         )
         
     }
 
     useEffect(_=>{
+        console.log(coords);
         
         dispatch(setLocation(coords))
         dispatch(setLocationSidebar(coords))

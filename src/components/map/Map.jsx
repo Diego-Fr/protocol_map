@@ -2,14 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import L from 'leaflet'
-import "leaflet-control-geocoder";
 import "leaflet-control-geocoder/dist/Control.Geocoder.css";
 import "leaflet/dist/leaflet.css";
 import styles from './Map.module.scss'
 import { loadSubugrhiLimit, getPointInformation, searchAddress, myLocationIcon, getPointCityInformation } from "./mapUtils";
-import axios from "axios";
-import { SearchAddressControl } from "./_SearchAddress";
 import { useMap } from "@/providers/MapProvider";
 import { setContent, setLocation, setShow } from "@/store/sidebarSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,7 +18,7 @@ const Map = () =>{
     const inputAddressRef = useRef(null)
     const [inputAdressValue, setInputAdressValue] = useState('')
     const [features, setFeatures] = useState([])
-    const {map, mapRef} = useMap() || {}
+    const {map, mapRef, L} = useMap() || {}
     const dispatch = useDispatch()
     const sliderOptions = useSelector(state=>state.slider)
     const mapOptions = useSelector(state=>state.map)
@@ -33,8 +29,8 @@ const Map = () =>{
     let featureGroup = null
 
     const addSearchBox = (map) =>{
-        let container = new SearchAddressControl({input: inputAddressRef.current})
-        map.addControl(container)
+        // let container = new SearchAddressControl({input: inputAddressRef.current, L})
+        // map.addControl(container)
     }
 
     const showHighlight = geometry =>{
@@ -58,27 +54,9 @@ const Map = () =>{
         }
     }
 
-    const searchText = async () =>{
-        let res = await searchAddress(inputAdressValue)
-        
-        
-        if(res.lat != undefined && res.lon != undefined){
-            //zoom no mapa
-            map.setView([res.lat, res.lon], 12);
-        
-            //abrir o sidebar com informações da ugrhi
-            dispatch(setLocation({lat: res.lat, lng: res.lon}))
-
-            //dispatch para exibir a geometria da área
-            dispatch(setHighlight({lat: res.lat, lng: res.lon, type:'city'}))
-            
-        }
-        
-        
-    }
+    
 
     useEffect(_=>{
-        console.log('aqui', mapOptions.highlight);
         
         const handler = async options =>{
             console.log(options);
@@ -169,7 +147,6 @@ const Map = () =>{
                     height: "100vh",
                 }}>
             </div>
-            <input ref={inputAddressRef} className={styles.searchInput} onChange={e=>setInputAdressValue(e.target.value)} onKeyDown={inputAdressKeyPress} placeholder="Pesquisar região" value={inputAdressValue}></input>
             </>)
 }
 

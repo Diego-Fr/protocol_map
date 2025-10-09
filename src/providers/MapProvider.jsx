@@ -12,36 +12,50 @@ export function MapProvider({children}){
     const tileRef = useRef(null)
     const sliderOptions = useSelector(state=>state.slider)
 
+    const LRef = useRef()
+
     
 
     useEffect(()=>{
-        if (!mapRef.current) return;
 
-        let map = L.map(mapRef.current, {}).setView([-22.55, -48.63], 7);
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
+        const run = async () =>{
+            if (!mapRef.current) return;
 
-        setMap(map)
+            const L = await import('leaflet')
+            await import("leaflet-control-geocoder");
 
-        map.createPane('sidebarPane');
-        let myPane = map.getPane('sidebarPane')
+            let map = L.map(mapRef.current, {}).setView([-22.55, -48.63], 7);
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
 
-        myPane.style.position = "absolute";
-        myPane.style.top = "0";
-        myPane.style.left = "0";
-        myPane.style.width = "100%";
-        myPane.style.height = "100%";
-        myPane.style.zIndex = 650; // acima do overlayPane
+            LRef.current = L
+
+            setMap(map)
+
+            map.createPane('sidebarPane');
+            let myPane = map.getPane('sidebarPane')
+
+            myPane.style.position = "absolute";
+            myPane.style.top = "0";
+            myPane.style.left = "0";
+            myPane.style.width = "100%";
+            myPane.style.height = "100%";
+            myPane.style.zIndex = 650; // acima do overlayPane
+        }
+
+        run()
+        
 
     }, [])
 
     useEffect(_=>{
-        
+        console.log(tileRef);
+        if(!LRef.current) return;
         //nao existe, criar caso o sliderOptions tenha ano e mes
         if(!tileRef.current){
             if(sliderOptions.year && sliderOptions.month){
-                tileRef.current = L.tileLayer.wms('https://geodados.daee.sp.gov.br/geoserver/ows', {
+                tileRef.current = LRef.current.tileLayer.wms('https://geodados.daee.sp.gov.br/geoserver/ows', {
                     layers: 'protocol_indicators_subugrhi',
                     format: 'image/png',
                     transparent: true,
@@ -58,10 +72,10 @@ export function MapProvider({children}){
             });
         }        
         
-    },[sliderOptions])
+    },[sliderOptions, LRef.current])
 
     return (
-        <MapContext.Provider value= {{map, mapRef}}>
+        <MapContext.Provider value= {{map, mapRef, L: LRef.current}}>
             {children}
         </MapContext.Provider>
     )
