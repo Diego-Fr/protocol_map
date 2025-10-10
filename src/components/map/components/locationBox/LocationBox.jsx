@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./LocationBox.module.scss"
 
-import L from "leaflet";
 import { useMap } from "@/providers/MapProvider";
 import { setLocation } from "@/store/userSlice";
 import { setLocation as setLocationSidebar } from "@/store/sidebarSlice";
