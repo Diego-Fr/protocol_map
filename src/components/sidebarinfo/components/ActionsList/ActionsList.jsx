@@ -11,7 +11,7 @@ const ActionsList = () =>{
     const [actions, setActions] = useState([])
 
     useEffect(_=>{
-        console.log(sidebarOptions.actions);
+        
         if(sidebarOptions.actions){
             setActions(sidebarOptions.actions.split(';'))
         } else {

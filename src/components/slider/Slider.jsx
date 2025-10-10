@@ -20,7 +20,7 @@ const Slider = () =>{
     const [block, setBlock] = useState(false)
     const [firstLoad, setFirstLoad] = useState(false)
 
-    const radius = 10;
+    const radius = 15;
     const buffer = 15;
     const months = 7
 
@@ -41,18 +41,17 @@ const Slider = () =>{
     const updateCursorPosition = e =>{
         const rect = containerRef.current.getBoundingClientRect();
         let step = rect.width/ months
-        let x = Math.abs(e.clientX - rect.right);
-        
+        let x = e.clientX - rect.left - rect.width;
 
-        const min = 0;
-        const max = rect.width;
+        const min = -rect.width;
+        const max = 0;
 
         //limit
-        x = Math.max(min, x);
         x = Math.min(max, x);
+        x = Math.max(min, x);
 
         //snap
-        x = Math.round(x / step)
+        x = Math.round(Math.abs(x) / step)
         
         
         selectedMonth.current = x
@@ -129,14 +128,14 @@ const Slider = () =>{
 
     return (
         <div className={styles.wrapper} ref={wrapperRef}>
-            <div ref={containerRef} className={styles.container} style={{height:10}} onMouseDown={handleBarMouseDown}>
-                <div className={styles.control} ref={controlRef} onMouseDown={handleCircleClick} style={{right: position.x-radius, width: radius*2, height: radius*2, transform: `translateY(-${radius+5}px)` }}></div>
+            <div ref={containerRef} className={styles.container} style={{height:7}} onMouseDown={handleBarMouseDown}>
+                <div className={styles.control} ref={controlRef} onMouseDown={handleCircleClick} style={{right: position.x-radius, width: radius*2, height: radius*2, transform: `translateY(-${radius+4}px)` }}></div>
 
                 {/* <div className={styles.yearLabels}>
                     {labels.map(label=> <div>{label}</div> )}
                 </div> */}
             </div>
-            <div className={`${styles.currentDate} font-semibold text-stone-700`}>{sliderOptions.selectedYear}-{sliderOptions.selectedMonth.toFixed(0).padStart(2, 0)}</div>
+            <div className={`${styles.currentDate} font-semibold text-stone-700`}>{sliderOptions.selectedMonth.toFixed(0).padStart(2, 0)}-{sliderOptions.selectedYear}</div>
             
         </div>
     )
