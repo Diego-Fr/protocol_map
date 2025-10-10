@@ -28,9 +28,6 @@ const Slider = () =>{
         selectedYear: 2025,
         selectedMonth: 8
     })
-
-
-
     
 
     const handleCircleClick = e => {

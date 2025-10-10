@@ -3,9 +3,9 @@ import Map from "../components/map/Map";
 import { MapProvider } from "@/providers/MapProvider";
 import SidebarInfo from "@/components/sidebarinfo/SidebarInfo";
 import Slider from "@/components/slider/Slider";
-import LocationButton from "@/components/map/components/locationButton/LocationButton";
 import Legend from "@/components/legend/Legend";
 import SearchAddressControl from "@/components/map/components/searchAdress/SearchAddressControl";
+import LocationBox from "@/components/map/components/locationBox/LocationBox";
 
 
 export default function Home() {
@@ -16,9 +16,9 @@ export default function Home() {
         <Map></Map>
         <SidebarInfo/>
         <Slider/>
-        <LocationButton/>
-        <Legend/>
         <SearchAddressControl></SearchAddressControl>
+        <LocationBox></LocationBox>
+        <Legend/>
       </MapProvider>
     </div>
   );

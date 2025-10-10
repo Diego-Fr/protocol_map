@@ -22,7 +22,7 @@ const SearchAddressControl = ({input}) => {
     if(!map || !L) return ;
     let customControl = L.Control.extend({
       options: {
-        position: 'topright',
+        position: 'topleft',
         input: 'aa'
       },
 

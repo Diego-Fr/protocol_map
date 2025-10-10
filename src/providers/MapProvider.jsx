@@ -24,9 +24,13 @@ export function MapProvider({children}){
             const L = await import('leaflet')
             await import("leaflet-control-geocoder");
 
-            let map = L.map(mapRef.current, {}).setView([-22.55, -48.63], 7);
+            let map = L.map(mapRef.current, {zoomControl: false}).setView([-22.55, -48.63], 7);
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            L.control.zoom({
+                position: 'topright'
             }).addTo(map);
 
             LRef.current = L
