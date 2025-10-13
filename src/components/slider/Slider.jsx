@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react"
 import { format, addMonths, differenceInDays } from 'date-fns';
 import { useDispatch } from 'react-redux';
 import { setDate } from '@/store/sliderSlice';
+import { Calendar } from 'lucide-react';
 
 const Slider = () =>{
     const {map, mapRef} = useMap()
@@ -129,13 +130,11 @@ const Slider = () =>{
     return (
         <div className={styles.wrapper} ref={wrapperRef}>
             <div ref={containerRef} className={styles.container} style={{height:7}} onMouseDown={handleBarMouseDown}>
+                <div className={styles.followBar} style={{width: position.x }}></div>
                 <div className={styles.control} ref={controlRef} onMouseDown={handleCircleClick} style={{right: position.x-radius, width: radius*2, height: radius*2, transform: `translateY(-${radius+4}px)` }}></div>
 
-                {/* <div className={styles.yearLabels}>
-                    {labels.map(label=> <div>{label}</div> )}
-                </div> */}
             </div>
-            <div className={`${styles.currentDate} font-semibold text-stone-700`}>{sliderOptions.selectedMonth.toFixed(0).padStart(2, 0)}-{sliderOptions.selectedYear}</div>
+            <div className={`${styles.currentDate} font-semibold text-stone-700`}><span className='pr-3'>{sliderOptions.selectedMonth.toFixed(0).padStart(2, 0)}-{sliderOptions.selectedYear} </span><Calendar></Calendar></div>
             
         </div>
     )

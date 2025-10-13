@@ -16,7 +16,7 @@ const Legend = () =>{
     ])
 
     const [auxItems, setAuxItems] = useState([
-        'em contingência'
+        'em escassez hídrica'
     ])
 
     const clickHandler = ()=>{

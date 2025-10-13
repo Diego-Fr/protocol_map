@@ -36,13 +36,21 @@
             cursor: pointer;
         }
 
+        .followBar{
+            background-color: rgb(167, 167, 167);
+            height: 100%;
+            position: absolute;
+            right: 0;
+            // width: 100px;
+        }
+
 
     }
 
 
     .currentDate{
         // background-color: white;
-        width: 100px;
+        width: 150px;
         height: 40px;
         border-radius: 10px;
         padding-left: 20px;
