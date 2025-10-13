@@ -1,14 +1,19 @@
 # Etapa 1 — Build
-FROM pnpm/node:20-alpine AS builder
+FROM node:20-alpine AS builder
 WORKDIR /app
+
+RUN npm install -g pnpm
+
 COPY package*.json ./
-RUN pnpm ci
+RUN pnpm install --frozen-lockfile
 COPY . .
 RUN pnpm run build
 
 # Etapa 2 — Runtime
-FROM pnpm/node:20-alpine AS runner
+FROM node:20-alpine AS runner
 WORKDIR /app
+
+RUN npm install -g pnpm
 
 # Copia apenas o que é necessário para rodar
 COPY --from=builder /app/package*.json ./
