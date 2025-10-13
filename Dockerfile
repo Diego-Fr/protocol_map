@@ -4,7 +4,7 @@ WORKDIR /app
 
 RUN npm install -g pnpm
 
-COPY package*.json ./
+COPY package*.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
 COPY . .
 RUN pnpm run build
@@ -17,10 +17,11 @@ RUN npm install -g pnpm
 
 # Copia apenas o que é necessário para rodar
 COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/pnpm-lock*.yaml ./
 COPY --from=builder /app/.next .next
 COPY --from=builder /app/public ./public
 
-RUN pnpm ci --omit=dev
+RUN pnpm install --frozen-lockfile
 
 ENV NODE_ENV=production
 EXPOSE 3000
