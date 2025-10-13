@@ -15,6 +15,10 @@ const Legend = () =>{
         'normal', 'atenção', 'alerta', 'crítico', 'emergência'
     ])
 
+    const [auxItems, setAuxItems] = useState([
+        'em contingência'
+    ])
+
     const clickHandler = ()=>{
         setShow(!show)
     }
@@ -30,9 +34,14 @@ const Legend = () =>{
     return (
         <div className={styles.container}>
             <div className={styles.title}><div>Legenda</div><div className={styles.control} onClick={clickHandler}>{show ? '-' : '+'}</div></div>
+
             <div ref={wrapperRef} className={styles.wrapper} style={{height: wrapperH }}>
                 {items.map((item, index)=> <div key={index} className={styles.line}><div className={`${styles.square}`} style={{backgroundColor: colorByClassificationName(item)}}></div><div>{item}</div></div> )}
             </div>
+            <div ref={wrapperRef} className={styles.wrapper} style={{height: wrapperH }}>
+                {auxItems.map((item, index)=> <div key={index} className={styles.line}><div className={`${styles.square} ${styles.cont}`} style={{backgroundColor: colorByClassificationName(item)}}></div><div>{item}</div></div> )}
+            </div>
+            
             
         </div>
     )

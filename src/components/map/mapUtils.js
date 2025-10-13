@@ -41,7 +41,8 @@ const getPointCityInformation = async (map,latLng) =>{
     const bbox = map.getBounds().toBBoxString(); // bbox atual do mapa
     const size = map.getSize(); // {x: width, y: height}
     const point = map.latLngToContainerPoint(latLng); // ponto clicado em pixels
-
+    
+  
     const url = new URL('https://geodados.daee.sp.gov.br/geoserver/ows');
     
     url.search = new URLSearchParams({
@@ -67,12 +68,22 @@ const getPointCityInformation = async (map,latLng) =>{
 
 const searchAddress = async query => {
   const url = `https://nominatim.openstreetmap.org/search?format=json&q=${query}`;
-  const results = await axios.get(url)
-
+  let results = await axios.get(url)
+  
+  
   if (results?.data.length > 0) {    
-    const { lat, lon, display_name } = results.data[0];
+
+    results = filterResults(results.data)
+    console.log(results);
+    
+    const { lat, lon, display_name } = results[0];
     return {lat, lon, display_name}
   }
+}
+
+//filtrar apenas regiões em são paulo pelo campo display_name
+const filterResults = list =>{
+  return list.filter(x=>x.display_name.includes('São Paulo'))
 }
 
 const myLocationIcon = className =>{

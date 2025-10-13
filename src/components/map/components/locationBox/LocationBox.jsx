@@ -8,6 +8,8 @@ import { setLocation } from "@/store/userSlice";
 import { setLocation as setLocationSidebar } from "@/store/sidebarSlice";
 import { useDispatch } from "react-redux";
 
+import { LocateFixed as Locate } from 'lucide-react';
+
 const LocationBox = () => {
     const {map,  L} = useMap();
     const containerRef = useRef(null)
@@ -83,7 +85,7 @@ const LocationBox = () => {
                     onDoubleClickCapture={e=>e.stopPropagation()} 
                     onClick={e=>clickHandler(e)}
                     ref={buttonRef}
-                    >X</button>
+                    ><Locate/></button>
             </div>
             <div className={styles.inputContainer}>
                 <label>Latitude</label>

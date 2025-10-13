@@ -48,7 +48,13 @@
                 height: 10px;
                 border-radius: 2px;
                 // background-color: black;
+
+                &.cont{
+                    background-image: repeating-linear-gradient( 45deg, /* ângulo das linhas */ rgba(0,0,0,0.2), /* cor da linha (semi-transparente) */ rgba(0,0,0,0.2) 2px, /* espessura da linha */ transparent 2px, /* intervalo transparente */ transparent 5px /* espaçamento entre linhas */ );
+                }
             }
+
+
         }
     }
     

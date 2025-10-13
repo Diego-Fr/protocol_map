@@ -10,7 +10,7 @@ import { useMap } from "@/providers/MapProvider";
 import { setContent, setLocation, setShow } from "@/store/sidebarSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setDate } from "@/store/sliderSlice";
-import { setHighlight } from "@/store/mapSlice";
+import { setHighlight, setMapView } from "@/store/mapSlice";
 
 const Map = () =>{
 
@@ -27,11 +27,7 @@ const Map = () =>{
     const featureGroupHighlightRef = useRef(null)
     
     let featureGroup = null
-
-    const addSearchBox = (map) =>{
-        // let container = new SearchAddressControl({input: inputAddressRef.current, L})
-        // map.addControl(container)
-    }
+    
 
     const showHighlight = geometry =>{
         
@@ -47,31 +43,34 @@ const Map = () =>{
         }        
         
     }
-
-    const inputAdressKeyPress = e =>{
-        if(e.keyCode === 13){
-            searchText()
-        }
-    }
-
     
-
+    // DISPARADO NO PEDIDO DE DEFINIÇÃO DE HIGHLIGHT AREA
     useEffect(_=>{
         
         const handler = async options =>{
-            console.log(options);
-            
+
             if(options.type === 'city'){
+                //zoom na área (tem um bug aqui)
+                dispatch(setMapView({lat: options.lat, lng: options.lng, zoom: 12}))
+                
+                //geometria vem do webservice
                 let geometry = await getPointCityInformation(map, {lat: options.lat, lng: options.lng})
+                
+                //exibindo geometria
                 showHighlight(geometry)
             } else if(options.type === 'subugrhi'){
+                //geometria vem do webservice
                 let geometry = await getPointInformation(map, {lat: options.lat, lng: options.lng},sliderOptions.year, sliderOptions.month)
+
+                //exibindo geometria
                 showHighlight(geometry)
             }
         }
 
         if(mapOptions.highlight?.lat != undefined && mapOptions.highlight?.lng != undefined){
             handler(mapOptions.highlight)
+        } else{
+            showHighlight(undefined) //limpando
         }
     },[mapOptions.highlight])
 
@@ -138,6 +137,12 @@ const Map = () =>{
             setFirstLoad(true)
         }
     }, [map])
+
+    useEffect(_=>{
+        if(!map) return;
+        let {lat, lng, zoom} = mapOptions.view
+        map.setView([lat, lng], zoom);
+    }, [mapOptions.view])
 
 
     return (<>

@@ -89,6 +89,8 @@ const SidebarInfo = () =>{
             }
 
             handler()
+        } else {
+            dispatch(setShow(false))    
         }
         
     }, [sidebarOptions.location])
