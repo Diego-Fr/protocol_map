@@ -19,7 +19,7 @@ const ActionsList = () =>{
         }
     }, [sidebarOptions.actions])
 
-    return <div className="p-3">
+    return <div className={`${styles.container} p-3`}>
         <div className={`pb-1 mb-2 text-center text-slate-500 ${styles.title}`}>Medidas de Contingência</div>
         {actions.length > 0 
             ?

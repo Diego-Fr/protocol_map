@@ -10,6 +10,7 @@ import ActionsList from './components/ActionsList/ActionsList';
 import { getPointInformation } from '../map/mapUtils';
 import { setContent, setShow } from '@/store/sidebarSlice';
 import { setHighlightGeometry } from '@/store/mapSlice';
+import Status from './components/status/Status';
 
 const SidebarInfo = () =>{
     const containerRef = useRef(null)
@@ -105,6 +106,7 @@ const SidebarInfo = () =>{
             {/* <div className={`font-semibold text-white text-center`} style={{backgroundColor:colorByClass}}>Clasificação: Alerta</div> */}
             <div className={`${styles.title} text-stone-800 font-semibold text-3xl pt-3 pl-4 pr-2 pb-1`}>{sidebarOptions.obj_name}</div>
             <div className={`${styles.subtitle} text-stone-600 font-semibold pl-4 pb-3`}>Código: {sidebarOptions.obj_cod}</div>
+            <Status></Status>
             <IndicatorsList/>
             <ActionsList/>
         </div>

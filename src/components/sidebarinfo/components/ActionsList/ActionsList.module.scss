@@ -1,13 +1,17 @@
-.title{
-    font-weight: 600;
+.container{
     box-shadow: 0 1px rgba(17, 17, 26, .1);
+
+    .title{
+        font-weight: 600;
+    }
+
+    .item{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-top: 5px;
+        padding: 5px;
+        border-radius: 8px;
+    }
 }
 
-.item{
-    
-    // border: 1px solid #ececec;
-    // text-align: center;
-    padding-top: 5px;
-    padding: 5px;
-    border-radius: 8px;
-}

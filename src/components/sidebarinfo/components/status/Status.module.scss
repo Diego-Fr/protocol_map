@@ -1,0 +1,19 @@
+.container{
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
+    .title{
+        // width: 100%;
+        font-weight: 600;
+        
+        text-align: center;
+    }
+
+    .text{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        color: rgb(173, 6, 132);
+    }
+
+    
+}
