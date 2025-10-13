@@ -2,9 +2,9 @@
 FROM node:20-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci
+RUN pnpm ci
 COPY . .
-RUN npm run build
+RUN pnpm run build
 
 # Etapa 2 — Runtime
 FROM node:20-alpine AS runner
@@ -15,7 +15,7 @@ COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/.next .next
 COPY --from=builder /app/public ./public
 
-RUN npm ci --omit=dev
+RUN pnpm ci --omit=dev
 
 ENV NODE_ENV=production
 EXPOSE 3000
