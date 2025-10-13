@@ -1,5 +1,5 @@
 # Etapa 1 — Build
-FROM node:20-alpine AS builder
+FROM pnpm/node:20-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
 RUN pnpm ci
@@ -7,7 +7,7 @@ COPY . .
 RUN pnpm run build
 
 # Etapa 2 — Runtime
-FROM node:20-alpine AS runner
+FROM pnpm/node:20-alpine AS runner
 WORKDIR /app
 
 # Copia apenas o que é necessário para rodar
