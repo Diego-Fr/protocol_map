@@ -53,6 +53,9 @@ const Map = () =>{
                 //zoom na área (tem um bug aqui)
                 dispatch(setMapView({lat: options.lat, lng: options.lng, zoom: 12}))
                 
+                
+                await new Promise(resolve => setTimeout(resolve, 1000))
+                
                 //geometria vem do webservice
                 let geometry = await getPointCityInformation(map, {lat: options.lat, lng: options.lng})
                 
@@ -60,6 +63,9 @@ const Map = () =>{
                 showHighlight(geometry)
             } else if(options.type === 'subugrhi'){
                 //geometria vem do webservice
+                
+                await new Promise(resolve => setTimeout(resolve, 1000))
+
                 let geometry = await getPointInformation(map, {lat: options.lat, lng: options.lng},sliderOptions.year, sliderOptions.month)
 
                 //exibindo geometria

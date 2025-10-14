@@ -1,0 +1,27 @@
+.container{
+    margin-top: 10px;
+    background-color: white;
+    width: 100%;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    overflow: hidden;
+    .itemWrapper{
+        padding-left: 20px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        background-color: white;
+        
+        cursor: pointer;
+        // border-bottom: 1px solid rgb(153, 153, 153);
+
+        .stateName{
+            margin-left: 5px;
+            color: rgb(131, 131, 131);
+        }
+
+        &:hover{
+            filter: brightness(0.95);
+        }
+    }
+}

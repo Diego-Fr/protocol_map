@@ -66,28 +66,23 @@ const getPointCityInformation = async (map,latLng) =>{
     return response.data
 }
 
-const searchAddress = async query => {
-  const url = `https://nominatim.openstreetmap.org/search?format=json&q=${query}`;
-  let results = await axios.get(url)
+const searchAddress = async (query,abortController) => {
   
+  // const url = `https://nominatim.openstreetmap.org/search?format=json&q=${query}&addressdetails=1&countrycodes=br&viewbox=-53.11,-19.79,-44.17,-25.36&bounded=1`;
+  const url = `https://photon.komoot.io/api/?q=${query}&osm_tag=place:municipality`
+  let res = await axios.get(url, {signal: abortController.signal})
   
-  if (results?.data.length > 0) {    
-
-    results = filterResults(results.data)
-    console.log(results);
-    
-    const { lat, lon, display_name } = results[0];
-    return {lat, lon, display_name}
-  }
+  return res
 }
 
 //filtrar apenas regiões em são paulo pelo campo display_name
 const filterResults = list =>{
-  return list.filter(x=>x.display_name.includes('São Paulo'))
+  
+  return list.filter(x=>x.properties.state === 'São Paulo' && ['city', 'town', 'village', 'municipality'].includes(x.properties.osm_value))
 }
 
 const myLocationIcon = className =>{
   return L.divIcon({className});
 }
 
-module.exports = {loadSubugrhiLimit,getPointInformation,searchAddress, myLocationIcon, getPointCityInformation}
+module.exports = {loadSubugrhiLimit,getPointInformation,searchAddress, myLocationIcon, getPointCityInformation,filterResults}

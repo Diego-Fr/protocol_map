@@ -67,6 +67,7 @@ const SidebarInfo = () =>{
                 try{
                 
                     let data = await getPointInformation(map, sidebarOptions.location, sliderOptions.year, sliderOptions.month)
+                    
                     if(data.features.length > 0){                        
                         let {no_subugrh, no_ugrhi, n_subugrhi, n_ugrhi, general_status, spi_6, ndvi, dry_d, spei_6, indicator_statuses, actions} = data.features[0].properties
                         dispatch(setContent({obj_name: no_subugrh, obj_cod: n_subugrhi, general_status, actions, indicator_statuses: JSON.parse(indicator_statuses), indicators: {spi_6, ndvi, dry_d, spei_6}}))
