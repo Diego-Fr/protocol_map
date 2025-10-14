@@ -39,7 +39,7 @@ const Logo = () =>{
   }, [map, L])
 
     return ( 
-        <img ref={imageRef} src="protocolo/images/logo.png" alt="Logo" width={120} height={60} style={{backdropFilter: 'blur(1px)'}}/>
+        <img ref={imageRef} src="/protocolo/images/logo.png" alt="Logo" width={120} height={60} style={{backdropFilter: 'blur(1px)'}}/>
     )
 
 }
