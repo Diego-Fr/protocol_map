@@ -9,6 +9,7 @@ import { setLocation as setLocationSidebar } from "@/store/sidebarSlice";
 import { useDispatch } from "react-redux";
 
 import { LocateFixed as Locate } from 'lucide-react';
+import { setMapView } from "@/store/mapSlice";
 
 const LocationBox = () => {
     const {map,  L} = useMap();
@@ -18,6 +19,11 @@ const LocationBox = () => {
         lat: '',
         lng: ''
     })
+
+    const latInputRef = useRef()
+    const lngInputRef = useRef()
+
+    const block = useRef()
 
 
     const dispatch = useDispatch()
@@ -36,9 +42,15 @@ const LocationBox = () => {
         locationControl.addTo(map);
 
         map.on('mousemove', function(e) {
-            const lat = e.latlng.lat.toFixed(5);
-            const lng = e.latlng.lng.toFixed(5);    
-            setBoxOptions(state=>({...state, lat, lng}))
+            if(!block.current){                
+                const lat = e.latlng.lat.toFixed(5);
+                const lng = e.latlng.lng.toFixed(5);    
+                setBoxOptions(state=>({...state, lat, lng}))
+            }
+        })
+
+        map.on('click', function(e) {
+            block.current = false
         })
 
         return () => {
@@ -50,6 +62,10 @@ const LocationBox = () => {
         if(!L || !buttonRef.current) return ;
         L.DomEvent.disableClickPropagation(buttonRef.current)
         L.DomEvent.disableScrollPropagation(buttonRef.current);
+        L.DomEvent.disableClickPropagation(latInputRef.current)
+        L.DomEvent.disableScrollPropagation(latInputRef.current);
+        L.DomEvent.disableClickPropagation(lngInputRef.current)
+        L.DomEvent.disableScrollPropagation(lngInputRef.current);
     },[L])
 
     const clickHandler = e=>{        
@@ -77,6 +93,18 @@ const LocationBox = () => {
         )
     }
 
+    const boxFocus = () =>{
+        block.current = true
+    }
+
+
+    const keyPress = (e) =>{
+        if(e.keyCode === 13){            
+            e.target.blur()
+            dispatch(setMapView({lat: boxOptions.lat, lng: boxOptions.lng, zoom: 12}))
+        }
+    }
+
     return (
         <div ref={containerRef} className={styles.container}>
             <div className={styles.crossContainer}>
@@ -92,15 +120,21 @@ const LocationBox = () => {
                 <input placeholder="Lat"
                  onDoubleClickCapture={e=>e.stopPropagation()} 
                  onChange={e=>setBoxOptions(state=>({...state, lat: e.target.value}))} 
-                 disabled
+                 onKeyDown={keyPress}
+                 onFocus={boxFocus}
+                 onPointerDown={boxFocus}
+                 ref={latInputRef}
                  value={boxOptions.lat}/>
             </div>
             <div className={styles.inputContainer}>
                 <label>Longitude</label>
                 <input placeholder="Lng"
                  onDoubleClickCapture={e=>e.stopPropagation()} 
-                 disabled
+                 onKeyDown={keyPress}
+                 onFocus={boxFocus}
+                 onPointerDown={boxFocus}
                  onChange={e=>setBoxOptions(state=>({...state, lng: e.target.value}))} 
+                 ref={lngInputRef}
                  value={boxOptions.lng}/>
             </div>
         </div>

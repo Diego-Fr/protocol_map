@@ -144,10 +144,21 @@ const Map = () =>{
         }
     }, [map])
 
-    useEffect(_=>{
-        if(!map) return;
+    useEffect(_=>{        
+        if(!map || !L) return;
         let {lat, lng, zoom} = mapOptions.view
-        map.setView([lat, lng], zoom);
+
+        lat = lat.replaceAll(',', '.')
+        lng = lng.replaceAll(',', '.')
+        console.log('tenteii', mapOptions);
+        
+        try{
+            map.setView([lat, lng], zoom);
+        } catch(e){
+            console.log('Coordenadas invalidas');
+            
+        }
+        
     }, [mapOptions.view])
 
 

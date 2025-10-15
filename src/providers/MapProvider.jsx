@@ -25,7 +25,7 @@ export function MapProvider({children}){
             const L = await import('leaflet')
             await import("leaflet-control-geocoder");
 
-            let map = L.map(mapRef.current, {zoomControl: false}).setView([-22.55, -48.63], 7);
+            let map = L.map(mapRef.current, {zoomControl: false,attributionControl:false, minZoom:7}).setView([-22.55, -48.63], 7);
             L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
@@ -36,7 +36,12 @@ export function MapProvider({children}){
 
             LRef.current = L
 
-            setMap(map)
+            setMap(map);    
+            
+            setTimeout(_=>{
+                map.setMaxBounds(map.getBounds())
+            },1000)
+            
 
             map.createPane('sidebarPane');
             let myPane = map.getPane('sidebarPane')

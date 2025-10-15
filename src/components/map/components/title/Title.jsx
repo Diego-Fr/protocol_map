@@ -3,6 +3,14 @@
 import { useEffect, useRef } from "react"
 import styles from './Title.module.scss'
 import { useMap } from "@/providers/MapProvider";
+import { Fugaz_One } from 'next/font/google'
+import { Droplet } from "lucide-react";
+import { Droplets } from "lucide-react";
+
+const fugazOne = Fugaz_One({
+  subsets: ['latin'],
+  weight: ['400'],
+})
 
 const Title = () =>{
     const {map, L} = useMap()
@@ -11,8 +19,9 @@ const Title = () =>{
     useEffect(_=>{
     if(!map || !L) return ;
     let customControl = L.Control.extend({
+      
       options: {
-        position: 'bottomleft',
+        position: 'topleft',
         input: 'aa'
       },
 
@@ -39,7 +48,7 @@ const Title = () =>{
   }, [map, L])
 
     return ( 
-        <div className={styles.container}  ref={imageRef}>PROTOCOLO DE ESCASSEZ HÍDRICA </div>
+        <div className={`${styles.container} ${fugazOne.className}`}  ref={imageRef}><div className={styles.text}>PROTOCOLO DE ESCASSEZ HÍDRICA</div> </div>
     )
 
 }
