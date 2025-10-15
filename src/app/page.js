@@ -18,10 +18,10 @@ export default function Home() {
         <Map></Map>
         <SidebarInfo/>
         <Slider/>
-        
+        <Logo></Logo>
         <SearchAddressControl></SearchAddressControl>
         <LocationBox></LocationBox>
-        <Logo></Logo>
+        
         <Legend/>
         {/* <Title/> */}
       </MapProvider>

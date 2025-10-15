@@ -12,7 +12,7 @@ const Logo = () =>{
     if(!map || !L) return ;
     let customControl = L.Control.extend({
       options: {
-        position: 'topleft',
+        position: 'bottomright',
         input: 'aa'
       },
 

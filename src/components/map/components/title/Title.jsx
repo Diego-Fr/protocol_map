@@ -12,7 +12,7 @@ const Title = () =>{
     if(!map || !L) return ;
     let customControl = L.Control.extend({
       options: {
-        position: 'topright',
+        position: 'bottomleft',
         input: 'aa'
       },
 
@@ -39,7 +39,7 @@ const Title = () =>{
   }, [map, L])
 
     return ( 
-        <div className={styles.container}  ref={imageRef}>MAPA ESCASSEZ HÍDRICA </div>
+        <div className={styles.container}  ref={imageRef}>PROTOCOLO DE ESCASSEZ HÍDRICA </div>
     )
 
 }

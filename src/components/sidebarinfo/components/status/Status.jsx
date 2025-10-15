@@ -7,6 +7,11 @@ const Status = () =>{
 
     const sidebarOptions = useSelector(state=>state.sidebar)    
 
+    useEffect(_=>{
+        console.log(sidebarOptions);
+        
+    },[sidebarOptions])
+
     return (
         sidebarOptions.actions &&
         <div className={`${styles.container} pb-1` }>
@@ -17,7 +22,7 @@ const Status = () =>{
                 <CircleAlert className='pr-2'></CircleAlert><div>DECLARADA ESCASSEZ HÍDRICA</div>
             </div>
             <div className={styles.delib}>
-                <a href='https://www.spaguas.sp.gov.br/site/wp-content/uploads/2025/09/Deliberacao-SP-Aguas-N-11.pdf' target='_blank'>Ver deliberação</a>
+                <a href={sidebarOptions.link} target='_blank'>Ver deliberação</a>
             </div>
         </div>
     )
