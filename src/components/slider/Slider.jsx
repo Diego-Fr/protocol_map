@@ -10,7 +10,7 @@ import { Calendar } from 'lucide-react';
 import { useIsMobile } from '@/hooks/useIsMobile';
 
 const Slider = () =>{
-    const {map, mapRef} = useMap()
+    const {map, L, mapRef} = useMap()
     const containerRef = useRef()
     const wrapperRef = useRef()
     const controlRef = useRef()
@@ -129,12 +129,21 @@ const Slider = () =>{
     //     }
     // },[map])
 
+    useEffect(_=>{
+        if(!L || !wrapperRef.current) return ;
+        L.DomEvent.disableClickPropagation(wrapperRef.current)
+        L.DomEvent.disableScrollPropagation(wrapperRef.current);
+        L.DomEvent.disableClickPropagation(containerRef.current)
+        L.DomEvent.disableScrollPropagation(containerRef.current);
+        L.DomEvent.disableClickPropagation(controlRef.current)
+        L.DomEvent.disableScrollPropagation(controlRef.current);
+    },[L])
 
     return (
         <div className={`${styles.wrapper} ${isMobile ? styles.mobile : ''}`} ref={wrapperRef}>
-            <div ref={containerRef} className={styles.container} style={{height:7}} onMouseDown={handleBarMouseDown}>
+            <div ref={containerRef} className={styles.container} style={{height:7}} onPointerDown={handleBarMouseDown}>
                 <div className={styles.followBar} style={{width: position.x }}></div>
-                <div className={styles.control} ref={controlRef} onMouseDown={handleCircleClick} style={{right: position.x-radius, width: radius*2, height: radius*2, transform: `translateY(-${radius+4}px)` }}></div>
+                <div className={styles.control} ref={controlRef} onPointerDown={handleCircleClick} style={{right: position.x-radius, width: radius*2, height: radius*2, transform: `translateY(-${radius+4}px)` }}></div>
 
             </div>
             <div className={`${styles.currentDate} font-semibold text-stone-700`}><span className='pr-3'>{sliderOptions.selectedMonth.toFixed(0).padStart(2, 0)}-{sliderOptions.selectedYear} </span><Calendar></Calendar></div>
