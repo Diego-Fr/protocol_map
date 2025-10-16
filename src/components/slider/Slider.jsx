@@ -23,11 +23,11 @@ const Slider = () =>{
 
     const radius = 15;
     const buffer = 15;
-    const months = 7
+    const months = 8
 
     const [sliderOptions, setSliderOptions] = useState({
         selectedYear: 2025,
-        selectedMonth: 8
+        selectedMonth: 9
     })
     
 
@@ -119,12 +119,12 @@ const Slider = () =>{
     }, [following])
 
     //primeira carregada, selecionando dado de mes especifico
-    useEffect(_=>{
-        if(!firstLoad){            
-            setSliderOptions(state => ({...state, selectedYear: 2025,selectedMonth:8}))
-            setFirstLoad(true)
-        }
-    },[map])
+    // useEffect(_=>{
+    //     if(!firstLoad){            
+    //         setSliderOptions(state => ({...state, selectedYear: 2025,selectedMonth:9}))
+    //         setFirstLoad(true)
+    //     }
+    // },[map])
 
 
     return (

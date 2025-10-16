@@ -24,9 +24,9 @@ const IndicatorsList = _ =>{
             <div className={`pb-1 mb-2 text-center ${styles.title} text-slate-500`}>Indicadores em criticidade</div>
             
             {criticalIndicators.length > 0 ? criticalIndicators.map((indicator, index) => 
-                <div className={`${styles.listItem} mb-1 gap-2P`} key={index} style={{background: `linear-gradient(to right, white -10%, ${colorByClassification(indicator.value)})`}}>
-                    <div className={styles.name} style={{color: colorByClassification(indicator.value)}}>{t(indicator.key)}</div>
-                    <div className={styles.classification}>{classificationName(indicator.value)}</div>
+                <div className={`${styles.listItem} mb-1 gap-2P`} key={index} style={{background: `linear-gradient(to right, white -10%, ${colorByClassification(indicator.value?.toString())})`}}>
+                    <div className={styles.name} style={{color: colorByClassification(indicator.value?.toString())}}>{t(indicator.key)}</div>
+                    <div className={styles.classification}>{classificationName(indicator.value?.toString())}</div>
                     {/* <div className={styles.status}>{sidebarOptions.indicators[indicator.key]}</div> */}
                 </div>
             ) : <>Nenhum indicador em estado crítico</>}

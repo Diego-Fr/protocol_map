@@ -7,13 +7,8 @@ const Status = () =>{
 
     const sidebarOptions = useSelector(state=>state.sidebar)    
 
-    useEffect(_=>{
-        console.log(sidebarOptions);
-        
-    },[sidebarOptions])
-
     return (
-        sidebarOptions.actions &&
+        sidebarOptions.link &&
         <div className={`${styles.container} pb-1` }>
             <div className={`${styles.title} mb-1 p-2 text-slate-500`}>
                 Situação

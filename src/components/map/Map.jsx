@@ -139,7 +139,7 @@ const Map = () =>{
 
     useEffect(_=>{
         if(!firstLoad){
-            dispatch(setDate({year: 2025, month: 8}))
+            dispatch(setDate({year: 2025, month: 9}))
             setFirstLoad(true)
         }
     }, [map])
@@ -148,9 +148,8 @@ const Map = () =>{
         if(!map || !L) return;
         let {lat, lng, zoom} = mapOptions.view
 
-        lat = lat.replaceAll(',', '.')
-        lng = lng.replaceAll(',', '.')
-        console.log('tenteii', mapOptions);
+        lat = lat.toString().replaceAll(',', '.')
+        lng = lng.toString().replaceAll(',', '.')
         
         try{
             map.setView([lat, lng], zoom);

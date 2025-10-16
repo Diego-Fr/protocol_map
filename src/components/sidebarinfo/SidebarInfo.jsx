@@ -9,7 +9,7 @@ import IndicatorsList from './components/IndicatorsList/IndicatorsList';
 import ActionsList from './components/ActionsList/ActionsList';
 import { getPointInformation } from '../map/mapUtils';
 import { setContent, setShow } from '@/store/sidebarSlice';
-import { setHighlightGeometry } from '@/store/mapSlice';
+import { setHighlight, setHighlightGeometry } from '@/store/mapSlice';
 import Status from './components/status/Status';
 
 const SidebarInfo = () =>{
@@ -103,6 +103,7 @@ const SidebarInfo = () =>{
 
     const closeClickHandler = ()=>{
         dispatch(setShow(false))
+        dispatch(setHighlight({}))
     }
 
     return (
