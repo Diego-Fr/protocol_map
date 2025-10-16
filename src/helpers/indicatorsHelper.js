@@ -31,6 +31,8 @@ const t = (text) =>{
             return 'anomalia de chuva'
         case 'dam_vol':
             return 'volume reservatório'
+        case 'dry_monitor':
+            return 'monitor de secas brasil'
         default:
             return text
     }

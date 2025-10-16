@@ -7,6 +7,7 @@ import { format, addMonths, differenceInDays } from 'date-fns';
 import { useDispatch } from 'react-redux';
 import { setDate } from '@/store/sliderSlice';
 import { Calendar } from 'lucide-react';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 const Slider = () =>{
     const {map, mapRef} = useMap()
@@ -23,7 +24,9 @@ const Slider = () =>{
 
     const radius = 15;
     const buffer = 15;
-    const months = 8
+    const months = 1
+
+    const isMobile = useIsMobile()
 
     const [sliderOptions, setSliderOptions] = useState({
         selectedYear: 2025,
@@ -74,7 +77,7 @@ const Slider = () =>{
     }
 
     const getDateFromMonthsNumber = number =>{        
-        return addMonths(new Date(2025, 0, 1), months - number)
+        return addMonths(new Date(2025, 7, 1), months - number)
     }
     
 
@@ -128,7 +131,7 @@ const Slider = () =>{
 
 
     return (
-        <div className={styles.wrapper} ref={wrapperRef}>
+        <div className={`${styles.wrapper} ${isMobile ? styles.mobile : ''}`} ref={wrapperRef}>
             <div ref={containerRef} className={styles.container} style={{height:7}} onMouseDown={handleBarMouseDown}>
                 <div className={styles.followBar} style={{width: position.x }}></div>
                 <div className={styles.control} ref={controlRef} onMouseDown={handleCircleClick} style={{right: position.x-radius, width: radius*2, height: radius*2, transform: `translateY(-${radius+4}px)` }}></div>

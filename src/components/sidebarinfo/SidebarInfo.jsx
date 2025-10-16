@@ -11,6 +11,7 @@ import { getPointInformation } from '../map/mapUtils';
 import { setContent, setShow } from '@/store/sidebarSlice';
 import { setHighlight, setHighlightGeometry } from '@/store/mapSlice';
 import Status from './components/status/Status';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 const SidebarInfo = () =>{
     const containerRef = useRef(null)
@@ -24,6 +25,8 @@ const SidebarInfo = () =>{
 
 
     const sidebarOptions = useSelector(state => state.sidebar)
+
+    const isMobile = useIsMobile()
 
     useEffect(_=>{
         if(!map) return;
@@ -107,7 +110,7 @@ const SidebarInfo = () =>{
     }
 
     return (
-        <div ref={containerRef} className={`${styles.container} ${sidebarOptions.show ? styles.show : ''}`}>
+        <div ref={containerRef} className={`${styles.container} ${sidebarOptions.show ? styles.show : ''} ${isMobile ? styles.mob : ''}`}>
             <div className={`${styles.close} text-stone-600`} onClick={closeClickHandler}>x</div>
             {/* <div className={`font-semibold text-white text-center`} style={{backgroundColor:colorByClass}}>Clasificação: Alerta</div> */}
             <div className={`${styles.title} text-stone-800 font-semibold text-3xl pt-3 pl-4 pr-2 pb-1`}>{sidebarOptions.obj_name}</div>

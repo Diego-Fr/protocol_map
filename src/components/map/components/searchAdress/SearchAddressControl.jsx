@@ -11,6 +11,7 @@ import { filterResults, searchAddress } from "../../mapUtils";
 
 import { Search, RotateCw, CircleX } from 'lucide-react';
 import SearchAddressList from "./components/SearchAddressList";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 
 const SearchAddressControl = ({input}) => {
@@ -26,6 +27,8 @@ const SearchAddressControl = ({input}) => {
   const [list, setList] = useState([])
 
   const abortControllerRef = useRef()
+
+  const isMobile = useIsMobile()
 
   useEffect(_=>{
     if(!map || !L) return ;
@@ -43,7 +46,7 @@ const SearchAddressControl = ({input}) => {
         // div.style.padding = "8px";
         div.style.borderRadius = "8px";
         div.style.boxShadow = "0 2px 6px rgba(0,0,0,0.2)";
-        div.style.width = '20vw'
+        div.style.width = isMobile ? '50vw' : '20vw'
         div.style.height = '40px'
         div.style.zIndex = 99999
 

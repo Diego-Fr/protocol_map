@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import styles from './Legend.module.scss'
 import { colorByClassificationName } from '@/helpers/indicatorsHelper'
 import { useMap } from '@/providers/MapProvider'
+import { useIsMobile } from '@/hooks/useIsMobile'
 
 const Legend = () =>{
 
@@ -11,10 +12,13 @@ const Legend = () =>{
 
     const {map, L} = useMap()
 
+    const isMobile = useIsMobile()
     const [show, setShow] = useState(true)
     const [wrapperH, setWrapperH] = useState('fit-content')
 
     const containerRef = useRef()
+
+    
 
     const [items, setItems] = useState([
         'Estágio 0 - normal', 'Estágio 1 - atenção', 'estágio 2 - alerta', 'estagio 3 - crítico', 'estagio 4 - emergência'
@@ -27,6 +31,12 @@ const Legend = () =>{
     const clickHandler = ()=>{
         setShow(!show)
     }
+
+    useEffect(_=>{
+        if(!isMobile) return;
+        setShow(false)
+        
+    },[isMobile])
 
     useEffect(_=>{
         if(show){
@@ -67,7 +77,7 @@ const Legend = () =>{
     }, [map, L])
 
     return (
-        <div ref={containerRef} className={styles.container}>
+        <div ref={containerRef} className={`${styles.container} ${isMobile ? styles.mob : ''}`}>
             <div className={styles.title}><div>Estágios de disponibilidade hídrica</div><div className={styles.control} onClick={clickHandler}>{show ? '-' : '+'}</div></div>
 
             <div ref={wrapperRef} className={styles.wrapper} style={{height: wrapperH }}>

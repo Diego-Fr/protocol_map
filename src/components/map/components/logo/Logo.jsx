@@ -3,10 +3,14 @@
 import { useEffect, useRef } from "react"
 import Image from 'next/image';
 import { useMap } from "@/providers/MapProvider";
+import { useIsMobile } from "@/hooks/useIsMobile";
+
+
 
 const Logo = () =>{
     const {map, L} = useMap()
     const imageRef = useRef()
+    const isMobile = useIsMobile()
 
     useEffect(_=>{
     if(!map || !L) return ;
@@ -19,7 +23,7 @@ const Logo = () =>{
       onAdd: function (map) {
         
         const div = L.DomUtil.create('div')
-
+        div.style.marginBottom = isMobile ? "50px" : '0px';
         // conteúdo HTML do control
         div.appendChild(imageRef.current);
 
