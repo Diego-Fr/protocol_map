@@ -1,5 +1,6 @@
  "use client"
 
+import { useIsMobile } from "@/hooks/useIsMobile";
 import { useSelector } from "react-redux";
 
 const { createContext, useContext, useRef, useState, useEffect } = require("react")
@@ -15,6 +16,8 @@ export function MapProvider({children}){
 
     const LRef = useRef()
 
+    const isMobile = useIsMobile()
+
     
 
     useEffect(()=>{
@@ -25,7 +28,7 @@ export function MapProvider({children}){
             const L = await import('leaflet')
             await import("leaflet-control-geocoder");
 
-            let map = L.map(mapRef.current, {zoomControl: false,attributionControl:false, minZoom:7}).setView([-22.55, -48.63], 7);
+            let map = L.map(mapRef.current, {zoomControl: false,attributionControl:false}).setView([-22.55, -48.63], 7);
             L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
@@ -38,9 +41,9 @@ export function MapProvider({children}){
 
             setMap(map);    
             
-            setTimeout(_=>{
-                map.setMaxBounds(map.getBounds())
-            },1000)
+            // setTimeout(_=>{
+                
+            // },1000)
             
 
             map.createPane('sidebarPane');
@@ -60,6 +63,13 @@ export function MapProvider({children}){
         
 
     }, [])
+
+    useEffect(_=>{       
+        if(!map) return
+        map.setMaxBounds(map.getBounds().pad(isMobile ? 0.8 : 0))
+        map.setMinZoom(isMobile ? 6 : 7)
+        map.setZoom(isMobile ? 6 : 7)
+    }, [map, isMobile])
 
     useEffect(_=>{
         if(!map || ugrhiTileRef.current) return;

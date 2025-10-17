@@ -30,5 +30,5 @@ body {
 .main-container{
   height: 100vh; /* altura da viewport */
   width: 100vw;  /* largura da viewport */
-  background-color: rebeccapurple;
+  /* background-color: rebeccapurple; */
 }
