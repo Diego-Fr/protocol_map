@@ -12,23 +12,26 @@ const ActionsList = () =>{
 
     useEffect(_=>{
         
-        if(sidebarOptions.actions){
+        if(sidebarOptions.actions){            
             setActions(sidebarOptions.actions.split(';'))
         } else {
             setActions([])
         }
     }, [sidebarOptions.actions])
 
-    return <div className={`${styles.container} p-3`}>
-        <div className={`pb-1 mb-2 text-center text-slate-500 ${styles.title}`}>Medidas de Contingência</div>
-        {actions.length > 0 
-            ?
-            actions.map((action,index)=> <div key={index} className={styles.item}>{action.split('-')[1]}</div> )
-            :
-            <div className={styles.item}>Nenhuma medida de contingência aplicada</div>
-        }
-        
-    </div>
+    return( 
+        sidebarOptions.general_status > 2 &&
+            <div className={`${styles.container} p-3`}>
+                <div className={`pb-1 mb-2 text-center text-slate-500 ${styles.title}`}>Medidas de Contingência</div>
+                {actions.length > 0 
+                    ?
+                    actions.map((action,index)=> <div key={index} className={styles.item}>{action.split('-')[1]}</div> )
+                    :
+                    <div className={styles.item}>Medidas de contingência em analise</div>
+                }
+                
+            </div>
+            )
 }
 
 export default ActionsList

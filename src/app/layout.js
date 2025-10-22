@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Protocólo Escassez",
   icons: {
-    icon: 'protocolo/images/logo_favicon.png'
+    icon: '/protocolo/images/logo_favicon.png'
   },
   description: "Plataforma para acompanhamento do protoclo de escassez hídrica",
 };
