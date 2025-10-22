@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Protocólo Escassez",
+  title: "Protocolo Escassez",
   icons: {
     icon: '/protocolo/images/logo_favicon.png'
   },
