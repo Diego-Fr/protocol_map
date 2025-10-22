@@ -9,19 +9,9 @@ import LocationBox from "@/components/map/components/locationBox/LocationBox";
 import Logo from "@/components/map/components/logo/Logo";
 import Title from "@/components/map/components/title/Title";
 import CenterButton from "@/components/map/components/centerButton/centerButton";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-
 
 export default function Home() {
 
-  const dispatch = useDispatch()
-
-  useEffect(()=>{
-    // fetchSubugrhis().then(data=>{
-      
-    // })
-  },[dispatch])
 
   return (
     <div className='main-container'>

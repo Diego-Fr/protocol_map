@@ -11,6 +11,8 @@ import { setContent, setLocation, setShow } from "@/store/sidebarSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setDate } from "@/store/sliderSlice";
 import { setHighlight, setMapView } from "@/store/mapSlice";
+import { fetchSubugrhis } from "@/utils/fetchData";
+import { setSubugrhis } from "@/store/dataSlice";
 
 const Map = () =>{
 
@@ -141,6 +143,9 @@ const Map = () =>{
         if(!firstLoad){
             dispatch(setDate({year: 2025, month: 9}))
             setFirstLoad(true)
+            fetchSubugrhis().then(data=>{
+                dispatch(setSubugrhis(data))
+            })
         }
     }, [map])
 
