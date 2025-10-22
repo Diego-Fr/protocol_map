@@ -27,7 +27,7 @@ const ActionsList = () =>{
                     ?
                     actions.map((action,index)=> <div key={index} className={styles.item}>{action.split('-')[1]}</div> )
                     :
-                    <div className={styles.item}>Medidas de contingência em analise</div>
+                    <div className={styles.item}>Medidas de contingência em análise</div>
                 }
                 
             </div>
