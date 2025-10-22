@@ -25,7 +25,7 @@ const Legend = () =>{
     ])
 
     const [auxItems, setAuxItems] = useState([
-        'em escassez hídrica'
+        'declarada escassez hídrica'
     ])
 
     const clickHandler = ()=>{
@@ -72,7 +72,7 @@ const Legend = () =>{
         map.addControl(control)
 
         return (_=>{
-        control.remove()
+            control.remove()
         })
     }, [map, L])
 

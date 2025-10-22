@@ -53,9 +53,9 @@ const CitiesList = () =>{
                     <div className={styles.itemContainer} key={index}>
                         <div className={styles.textContainer}>
                             <div className={styles.title}>{x.name}</div>
-                            <div className={`${styles.secondary} mb-2`}>{x.cod_ibge}</div>
-                            <div className={styles.secondary}>Decreto: nº {x.decree_number}, de {x.start?.substring(0,10)}</div>
-                            <div className={styles.secondary}>Tipo: {x.decree_type}</div>
+                            <div className={`${styles.secondary}`}></div>
+                            <div className={styles.secondary}>Decreto: nº {x.decree_number} de {x.start?.substring(0,10)}</div>
+                            <div className={styles.secondary}>Tipo Decreto: {x.decree_type}</div>
                         </div>
                         {x.decree_link &&  <div className={styles.button}><a href={x.decree_link} target="_blank">VER</a></div>}
                     </div>)}</div>

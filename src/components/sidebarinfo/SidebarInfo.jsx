@@ -76,7 +76,7 @@ const SidebarInfo = () =>{
                         
                         let {no_subugrh, no_ugrhi, n_subugrhi, n_ugrhi, general_status, spi_6, ndvi, dry_d, spei_6, indicator_statuses, actions, link} = data.features[0].properties
                         
-                        dispatch(setContent({obj_name: no_subugrh, obj_cod: n_subugrhi, general_status, actions, indicator_statuses: JSON.parse(indicator_statuses), indicators: {spi_6, ndvi, dry_d, spei_6}, link}))
+                        dispatch(setContent({obj_name: no_subugrh, no_ugrhi, n_ugrhi, obj_cod: n_subugrhi, general_status, actions, indicator_statuses: JSON.parse(indicator_statuses), indicators: {spi_6, ndvi, dry_d, spei_6}, link}))
                         dispatch(setShow(true))
                         if(mapOptions.highlight === undefined){
                             dispatch(setHighlightGeometry({geometry: data.features[0]}))
@@ -113,10 +113,15 @@ const SidebarInfo = () =>{
             <div className={`${styles.close} text-stone-600`} onClick={closeClickHandler}>x</div>
             {/* <div className={`font-semibold text-white text-center`} style={{backgroundColor:colorByClass}}>Clasificação: Alerta</div> */}
             <div className={`${styles.title} text-stone-800 font-semibold text-3xl pt-3 pl-4 pr-2 pb-1`}>{sidebarOptions.obj_name}</div>
-            <div className={`${styles.subtitle} text-stone-600 font-semibold pl-4 pb-3`}>Código: {sidebarOptions.obj_cod}</div>
-            <Status></Status>
+            <div className={`${styles.subtitle} text-stone-600 font-semibold pl-4 pb-0`}>Código: {sidebarOptions.obj_cod}</div>
+            <div className={`${styles.subtitle} text-stone-600 font-semibold pl-4 pb-3`}>Ugrhi: {parseInt(sidebarOptions.n_ugrhi)} - {sidebarOptions.no_ugrhi}</div>
+            
+            <Status/>
+
             <IndicatorsList/>
+
             <ActionsList/>
+
             <CitiesList/>
         </div>
     )
