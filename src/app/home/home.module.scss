@@ -1,0 +1,21 @@
+.imagesContainer{
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    img{
+        // position: absolute;
+        // right: 20px;
+        // width: 100%;
+
+        &.mobile{
+            // right: 20px;
+            height: 400px;
+        }
+
+        &.monitor{
+            height: 500px;
+        }
+    }
+}

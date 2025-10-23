@@ -1,0 +1,22 @@
+.imagesContainer{
+    position: absolute;
+    border-radius: 10px;
+    bottom: 0;
+    transform: translateY(20%);
+    // overflow: hidden;
+    width: 50%;
+    border-radius: 20px;
+    // padding: 20px;
+
+    .mapImage{
+        border-radius: 20px;
+        overflow: hidden;
+    }
+
+    .mobileImage{
+        position: absolute;
+        z-index: 9999;
+        top: 0;
+        right: -50;
+    }
+}
