@@ -13,11 +13,12 @@ export default function Hero(){
                 <p className="text-lg mb-6  text-center">
                     Acesse o mapa do Protocolo de Escassez Hídrica de São Paulo, e acompanhe como esta o estágio da sua região.
                 </p>
-                <button
+                <a
                     className="bg-blue-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition"
+                    href='/protocolo'
                 >
                     Acessar Mapa
-                </button>
+                </a>
             </div>
             <div className={`shadow-lg ${styles.imagesContainer}`}>
                 <div className={`${styles.mapImage}`}>
