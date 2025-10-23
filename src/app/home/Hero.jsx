@@ -8,10 +8,10 @@ export default function Hero(){
         <section className={`flex relative flex-col items-center pt-30 min-h-[calc(100vh-80px)] bg-gradient-to-br bg-white  px-2 w-full ${inter.className}`}>
             <div className='w-3/4 text-center'>
                 <h1 className="text-5xl font-bold mb-10 text-center">
-                    POR UMA SÃO PAULO COM MAIOR SEGURANÇA HÍDRICA, E MELHOR DISTRIBUIÇÃO DOS RECURSOS NATURAIS
+                    SEGURANÇA HÍDRICA PARA O ESTADO DE SÃO PAULO
                 </h1>
                 <p className="text-lg mb-6  text-center">
-                    Acesse o mapa do Protocolo de Escassez Hídrica de São Paulo, e veja como esta o estado da sua região.
+                    Acesse o mapa do Protocolo de Escassez Hídrica de São Paulo, e acompanhe como esta o estágio da sua região.
                 </p>
                 <button
                     className="bg-blue-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition"
