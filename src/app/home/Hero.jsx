@@ -30,6 +30,12 @@ export default function Hero(){
                     <img src='/protocolo/images/mobileframe-portrait3.png' />
                 </div>
             </div>
+            <div className={`absolute bottom-0 transform translate-y-1/2 p-4 bg-white rounded-2xl border-1 border-gray-100 shadow-lg flex items-center `}>
+                <div className={``}>
+                    <img src='/protocolo/images/logo.png' />
+                </div>
+
+            </div>
         </section> 
     )
 }
