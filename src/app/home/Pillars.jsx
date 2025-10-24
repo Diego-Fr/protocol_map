@@ -5,12 +5,12 @@ export default function Pillars() {
     {
       icon: <Activity className="w-10 h-10 text-blue-600" />,
       title: 'Monitoramento e Alertas',
-      desc: 'Sistema contínuo de vigilância e emissão de avisos com base em dados atualizados e confiáveis.',
+      desc: 'Sistema integrado de monitoramento contínuo e emissão de alertas precoces, baseado na análise de imagens de satélite e dados provenientes de estações telemétricas.',
     },
     {
       icon: <ShieldCheck className="w-10 h-10 text-green-600" />,
       title: 'Fundamentação Técnica',
-      desc: 'Baseado em critérios científicos, indicadores ambientais e protocolos oficiais consolidados.',
+      desc: 'Baseado em critérios técnicos, indicadores socioeconômicos e percepção local da seca e escassez',
     },
     {
       icon: <AlertTriangle className="w-10 h-10 text-yellow-600" />,
