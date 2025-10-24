@@ -20,7 +20,7 @@ export default function Pillars() {
   ]
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 pb-30 bg-gray-100">
       <div className="max-w-6xl mx-auto px-6 text-center">
         <h2 className="text-3xl font-bold mb-12 text-gray-800">
           PILARES DO PROTOCOLO

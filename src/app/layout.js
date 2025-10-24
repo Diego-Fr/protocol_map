@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
         <meta name="color-scheme" content="dark" />
       </head>
       <body suppressHydrationWarning
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-100`}
       >
         <ReduxProvider>
           {children}

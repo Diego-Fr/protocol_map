@@ -1,8 +1,8 @@
 import Based from './Based'
+import FAQ from './FAQ'
 import Footer from './Footer'
 import Header from './Header'
 import Hero from './Hero'
-import styles from './home.module.scss'
 import Pillars from './Pillars'
 
 export default function Page(){
@@ -10,8 +10,8 @@ export default function Page(){
         <>
             <Header/>
             <Hero></Hero>
-            <section className="flex flex-row items-center justify-center pt-70 pb-30 bg-gray-50 px-6 w-full">
-                <div className='w-2/4 text-center'>
+            <section className="flex flex-row items-center justify-center pt-40 pb-30 bg-gray-100 px-6 w-full">
+                <div className='container mx-auto text-center max-w-4xl'>
                     <h5 className="text-3xl font-bold  text-center mb-5">
                         O QUE É O PROTOCOLO? 
                     </h5>
@@ -24,10 +24,12 @@ export default function Page(){
                 
             </section>
 
+            
+
             <Pillars></Pillars>
 
-            <section className="flex flex-row items-center justify-center pt-30 pb-30 bg-gray-50 px-6 w-full gap-10">
-                <div className='w-1/3 text-center'>
+            <section className="flex flex-row items-center justify-center pt-30 pb-50 bg-gray-100 px-6 w-full gap-10">
+                <div className='container mx-auto text-center max-w-4xl'>
                     <h2 className="text-3xl font-bold mb-4 text-center">
                         INDICADORES  
                     </h2>
@@ -39,12 +41,13 @@ export default function Page(){
                         escassez hídrica.
                     </p>
                 </div>
-                <div className='w-1/3 text-center'>
+                {/* <div className='w-1/3 text-center'>
                    
-                </div>
+                </div> */}
             </section>
 
             <Based></Based>
+            <FAQ></FAQ>
             <Footer></Footer>
             
         </>

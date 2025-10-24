@@ -1,8 +1,8 @@
 export default function Based(){
     return (
-      <section className="bg-gray-50 pt-10 pb-30">
-        <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-4xl font-semibold text-gray-600 mb-5">
+      <section className="bg-gray-100 pt-10 pb-50">
+        <div className="container mx-auto text-center max-w-4xl">
+          <h2 className="text-3xl font-bold mb-4 text-center uppercase">
             Baseado em estruturas internacionais de gestão de risco a desastres
           </h2>
 
