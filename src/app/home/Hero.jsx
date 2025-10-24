@@ -22,8 +22,8 @@ export default function Hero(){
                     Acessar Mapa
                 </a>
             </div>
-            <div className={`container mx-auto max-w-4xl border-1 border-gray-200 shadow-lg ${styles.imagesContainer}`}>
-                <div className={`${styles.mapImage}`}>
+            <div className={`container mx-auto max-w-4xl ${styles.imagesContainer}`}>
+                <div className={`border-1 border-gray-200 shadow-lg ${styles.mapImage}`}>
                     <img src='/protocolo/images/protocol_map.png' />
                 </div>
                 <div className={`${styles.mobileImage}`}>
@@ -35,6 +35,9 @@ export default function Hero(){
                     <img src='/protocolo/images/logo.png' />
                 </div>
 
+            </div>
+            <div className={`mt-2`}>
+                Mapa referente a <b>SETEMBRO</b> de <b>2025</b>
             </div>
         </section> 
     )
