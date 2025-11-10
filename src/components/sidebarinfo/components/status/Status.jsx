@@ -1,11 +1,26 @@
 import { CircleAlert } from 'lucide-react'
 import styles from './Status.module.scss'
 import { useSelector } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 const Status = () =>{
 
-    const sidebarOptions = useSelector(state=>state.sidebar)    
+    const [state, setState] = useState('')
+
+    const sidebarOptions = useSelector(state=>state.sidebar)
+    const sliderOptions = useSelector(state=>state.slider)
+
+    useEffect(_=>{
+        if(sidebarOptions.link){
+            setState('DECLARADA ESCASSEZ HÍDRICA')
+        } else {
+            if(sliderOptions.month === new Date().getMonth() && sliderOptions.year === new Date().getFullYear()){
+                setState('EM ANÁLISE')
+            } else {
+                setState('NÃO DECLARADA ESCASSEZ HÍDRICA')
+            }
+        }
+    }, [sidebarOptions])    
 
     return (
         (sidebarOptions.link || sidebarOptions.general_status > 2) &&
@@ -14,7 +29,7 @@ const Status = () =>{
                     Situação
                 </div>
                 <div className={`${sidebarOptions.link ? styles.alert : styles.text}`}>
-                    <CircleAlert className='pr-2'></CircleAlert><div>{sidebarOptions.link ? 'DECLARADA ESCASSEZ HÍDRICA' : 'EM ANÁLISE'}</div>
+                    <CircleAlert className='pr-2'></CircleAlert><div>{state}</div>
                 </div>
                 {sidebarOptions.link &&
                     <div className={styles.delib}>

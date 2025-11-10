@@ -24,7 +24,6 @@ const IndicatorsList = _ =>{
     const criticalIndicators = useMemo(_=> indicators.filter(x=>parseInt(x.value) == sidebarOptions.general_status), [indicators])
     
     const tooltipComponentByIndicator = indicator =>{
-        console.log(indicator);
         switch(indicator.key){
             case 'spi_6': return <Spi></Spi>
             default: return <Spei6></Spei6>
@@ -37,7 +36,8 @@ const IndicatorsList = _ =>{
             <div className={`pb-1 mb-2 text-center ${styles.title} text-slate-500`}>Indicadores em criticidade</div>
             <Tooltip id="my-tooltip" place={'left'}  />
             {criticalIndicators.length > 0 ? criticalIndicators.map((indicator, index) => 
-                <a data-tooltip-html={ReactDOMServer.renderToStaticMarkup(tooltipComponentByIndicator(indicator))} data-tooltip-id="my-tooltip"  className={`${styles.listItem} mb-1 gap-2P`} key={index} style={{background: `linear-gradient(to right, white -10%, ${colorByClassification(indicator.value?.toString())})`}}>
+                //<a data-tooltip-html={ReactDOMServer.renderToStaticMarkup(tooltipComponentByIndicator(indicator))} data-tooltip-id="my-tooltip"  className={`${styles.listItem} mb-1 gap-2P`} key={index} style={{background: `linear-gradient(to right, white -10%, ${colorByClassification(indicator.value?.toString())})`}}>
+                <a className={`${styles.listItem} mb-1 gap-2P`} key={index} style={{background: `linear-gradient(to right, white -10%, ${colorByClassification(indicator.value?.toString())})`}}>
                     <div className={styles.name} style={{color: colorByClassification(indicator.value?.toString())}}>{t(indicator.key)}</div>
                     <div className={styles.classification}>{classificationName(indicator.value?.toString())}</div>
                     {/* <div className={styles.status}>{sidebarOptions.indicators[indicator.key]}</div> */}
