@@ -40,7 +40,14 @@ const Map = () =>{
 
         if(featureGroupHighlightRef.current){
             featureGroupHighlightRef.current.clearLayers()
-            if(geometry) featureGroupHighlightRef.current.addLayer(L.geoJson(geometry))
+            if(geometry) featureGroupHighlightRef.current.addLayer(L.geoJson(geometry, {style: {
+                color: '#29a9ff',    // cor da borda (branco)
+                weight: 1,           // espessura da borda
+                dashArray: '3 3',    // padrão tracejado: "tamanho espaço"
+                opacity: 1,          // opacidade da borda
+                fill: 'white',         // sem preenchimento
+                fillOpacity: 0.2       // garante que não haja preenchimento
+            }}))
             
         }        
         

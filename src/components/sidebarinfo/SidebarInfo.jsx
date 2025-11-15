@@ -13,10 +13,11 @@ import { setHighlight, setHighlightGeometry } from '@/store/mapSlice';
 import Status from './components/status/Status';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import CitiesList from './components/CitiesList/CitiesList';
+import scrollbarStyles from '@/styles/scrollbar.module.scss'
 
 const SidebarInfo = () =>{
     const containerRef = useRef(null)
-    const {map, mapRef} = useMap()
+    const {map, mapRef, L} = useMap()
     const [colorByClass, setColoByKlass] = useState('red-500')
 
     const dispatch = useDispatch()
@@ -108,21 +109,28 @@ const SidebarInfo = () =>{
         dispatch(setHighlight({}))
     }
 
+    useEffect(_=>{  
+        if(!containerRef.current || !L) return
+        L.DomEvent.disableScrollPropagation(containerRef.current)
+    }, [L])
+
     return (
         <div ref={containerRef} className={`${styles.container} ${sidebarOptions.show ? styles.show : ''} ${isMobile ? styles.mob : ''}`}>
-            <div className={`${styles.close} text-stone-600`} onClick={closeClickHandler}>x</div>
-            {/* <div className={`font-semibold text-white text-center`} style={{backgroundColor:colorByClass}}>Clasificação: Alerta</div> */}
-            <div className={`${styles.title} text-stone-800 font-semibold text-3xl pt-3 pl-4 pr-2 pb-1`}>{sidebarOptions.obj_name}</div>
-            <div className={`${styles.subtitle} text-stone-600 font-semibold pl-4 pb-0`}>Código: {sidebarOptions.obj_cod}</div>
-            <div className={`${styles.subtitle} text-stone-600 font-semibold pl-4 pb-3`}>Ugrhi: {parseInt(sidebarOptions.n_ugrhi)} - {sidebarOptions.no_ugrhi}</div>
-            
-            <Status/>
+            <div className={styles.infoWrapper}>
+                <div className={`${styles.close} text-stone-600`} onClick={closeClickHandler}>x</div>
+                <div className={`${styles.title} text-stone-800 font-semibold text-3xl pt-3 pl-4 pr-2 pb-1`}>{sidebarOptions.obj_name}</div>
+                <div className={`${styles.subtitle} text-stone-600 font-semibold pl-4 pb-0`}>Código: {sidebarOptions.obj_cod}</div>
+                <div className={`${styles.subtitle} text-stone-600 font-semibold pl-4 pb-3`}>Ugrhi: {parseInt(sidebarOptions.n_ugrhi)} - {sidebarOptions.no_ugrhi}</div>
+                <Status/>
+            </div>
+            <div className={`${styles.contentWrapper} ${scrollbarStyles.customScrollbar}`}>
+                
+                <IndicatorsList/>
 
-            <IndicatorsList/>
+                <ActionsList/>
 
-            <ActionsList/>
-
-            <CitiesList/>
+                <CitiesList/>
+            </div>
         </div>
     )
 }
