@@ -1,0 +1,28 @@
+.customScrollbar {
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #bdbdbd #f0f0f0;
+}
+
+/* Largura da barra */
+.customScrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* "Trilho" */
+.customScrollbar::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 4px;
+}
+
+/* A parte que se move */
+.customScrollbar::-webkit-scrollbar-thumb {
+  background: #57aff7;
+  border-radius: 4px;
+  // width: 1px;
+}
+
+/* Cor quando passa o mouse */
+.customScrollbar::-webkit-scrollbar-thumb:hover {
+  background: #47a1eb;
+}

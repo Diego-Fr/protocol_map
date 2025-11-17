@@ -12,12 +12,12 @@ const Status = () =>{
 
     useEffect(_=>{
         if(sidebarOptions.link){
-            setState('DECLARADA ESCASSEZ HÍDRICA')
+            setState(1)
         } else {
             if(sliderOptions.month === new Date().getMonth() && sliderOptions.year === new Date().getFullYear()){
-                setState('EM ANÁLISE')
+                setState(0)
             } else {
-                setState('NÃO DECLARADA ESCASSEZ HÍDRICA')
+                setState(2)
             }
         }
     }, [sidebarOptions])    
@@ -28,8 +28,12 @@ const Status = () =>{
                 <div className={`${styles.title} mb-1 p-2 text-slate-500`}>
                     Situação
                 </div>
-                <div className={`${sidebarOptions.link ? styles.alert : styles.text}`}>
-                    <CircleAlert className='pr-2'></CircleAlert><div>{state}</div>
+                <div className={`${state === 1 ? styles.alert : state === 0 ? styles.text : styles.not_declared}`}>
+                    <CircleAlert className='pr-2'></CircleAlert><div>{
+                    state === 0 ? 'EM ANÁLISE' :
+                    state === 1 ? 'DECLARADA ESCASSEZ HÍDRICA' :
+                    state === 2 && 'NÃO DECLARADA ESCASSEZ HÍDRICA'
+                    }</div>
                 </div>
                 {sidebarOptions.link &&
                     <div className={styles.delib}>

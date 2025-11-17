@@ -23,7 +23,7 @@ const CitiesList = () =>{
 
     useEffect(() =>{
         if(subugrhis && sidebarOptions.show){
-            console.log(sidebarOptions);
+            
             setIsLoading(true)
             //subugrhi com lista de cidades que pertencem a ela
             let subugrhi = findSubugrhi(sidebarOptions.obj_cod)

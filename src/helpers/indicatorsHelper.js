@@ -84,4 +84,18 @@ const colorByClassification = (text) =>{
     }
 }
 
-module.exports = {checkIndicatorClassification,t,classificationName,colorByClassification, colorByClassificationName}
+const indicatorsStages = indicator_name =>{
+    switch(indicator_name){
+        case 'spi_6':
+            return [
+                {stage: 1, threshold: '-1,282 a -0,524'},
+                {stage: 2, threshold: '-1,645 a -1,283'},
+                {stage: 3, threshold: '-2,326 a -1,646'},
+                {stage: 4, threshold: 'menor que -2,326'}
+            ]
+        default:
+            return []
+    }
+}
+
+module.exports = {checkIndicatorClassification,t,classificationName,colorByClassification, colorByClassificationName,indicatorsStages}

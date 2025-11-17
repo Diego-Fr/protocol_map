@@ -3,14 +3,20 @@
     // border: 1px solid rgb(216, 216, 216);
     // border-top: 1px solid rgb(179, 179, 179);
     // border-bottom: 1px solid rgb(197, 197, 197);
+
     margin: 0px !important;
     // border-radius: 5px;
     box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
+    transition: 0.3s all;
+    
+    .indicatorsWrapper{
+        transition: 0.3s height;
+        overflow: hidden;
+        // height: 80px;
+    }
 
     .title{
-        font-weight: 600;
-        
-        
+        font-weight: 600;        
     }
 
     .listItem{
@@ -18,13 +24,15 @@
         grid-template-columns: 1fr 1fr;
         text-align: center;
         align-items: center;
+        // height: 30px;
         
         margin-bottom: 10px;
         // border: 1px solid rgb(248, 248, 248);
         // box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
         box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
         border-radius: 3px;
-        // overflow: hidden;
+        overflow: hidden;
+        cursor: pointer;
         
 
         .status{
@@ -52,5 +60,24 @@
             font-weight: 600;
             
         }
+    }
+
+    .seeMoreButton{
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+        // border: 1px solid rgb(216, 216, 216);
+        border-radius: 5px;
+        gap: 5px;
+        color: rgb(85, 85, 85);
+        cursor: pointer;
+        transition: 0.2s all;
+
+        &:hover{
+            color: rgb(37, 150, 255);
+        }
+        
     }
 }

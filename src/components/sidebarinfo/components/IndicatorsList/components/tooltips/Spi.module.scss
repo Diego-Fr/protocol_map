@@ -1,0 +1,29 @@
+.table {
+  tbody {
+    tr {
+      td {
+        padding: 5px;
+        text-align: left;
+      }
+
+      td:last-child {
+        padding-right: 20px;
+        text-transform: capitalize;
+        text-align: right;
+      }
+    }
+
+    tr.selected{
+      background-color: rgba(0, 0, 0, 0.5);
+      border: 1px solid black;
+    }
+  }
+
+  thead{
+    tr{
+        th{
+            padding: 5px;
+        }
+    }
+  }
+}
