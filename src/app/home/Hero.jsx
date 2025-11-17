@@ -13,7 +13,7 @@ export default function Hero(){
                     SEGURANÇA HÍDRICA PARA O ESTADO DE SÃO PAULO
                 </h1>
                 <p className="text-lg mb-10 text-center">
-                    Acesse o mapa do Protocolo de Escassez Hídrica de São Paulo e confira o estágio de disponibilidade hídrica da sua região.<br/> O mapa é atualizado mensalmente, com base nos dados consolidados do período anterior
+                    Acesse o mapa do Protocolo de Escassez Hídrica de São Paulo e confira o estágio de disponibilidade hídrica da sua região.<br/> O mapa é atualizado mensalmente e publicado até o quinto dia útil do mês com base nos dados consolidados do período anterior
                 </p>
                 <a
                     className="bg-blue-500 border-2 border-sky-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition"
