@@ -12,7 +12,6 @@ const ActionsList = () =>{
     const [actions, setActions] = useState([])
 
     useEffect(_=>{
-        console.log(sliderOptions);
         
         if(sidebarOptions.actions){            
             setActions(sidebarOptions.actions.split(';'))
@@ -22,7 +21,7 @@ const ActionsList = () =>{
     }, [sidebarOptions.actions])
 
     useEffect(_=>{  
-        console.log(sliderOptions.month,new Date().getMonth() );
+        // console.log(sliderOptions.month,new Date().getMonth() );
         
     },[sliderOptions])
 

@@ -24,13 +24,13 @@ const Slider = () =>{
 
     const radius = 15;
     const buffer = 15;
-    const months = 2
+    const months = 3
 
     const isMobile = useIsMobile()
 
     const [sliderOptions, setSliderOptions] = useState({
         selectedYear: 2025,
-        selectedMonth: 10
+        selectedMonth: 11
     })
     
 
