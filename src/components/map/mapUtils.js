@@ -11,7 +11,7 @@ const getPointInformation = async (map,latLng,year, month) =>{
     const bbox = map.getBounds().toBBoxString(); // bbox atual do mapa
     const size = map.getSize(); // {x: width, y: height}
     const point = map.latLngToContainerPoint(latLng); // ponto clicado em pixels
-
+    
     const url = new URL('https://geodados.daee.sp.gov.br/geoserver/ows');
     
     url.search = new URLSearchParams({

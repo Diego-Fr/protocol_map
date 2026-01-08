@@ -2,6 +2,7 @@ import { CircleAlert } from 'lucide-react'
 import styles from './Status.module.scss'
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
+import dayjs from 'dayjs'
 
 const Status = () =>{
 
@@ -14,7 +15,7 @@ const Status = () =>{
         if(sidebarOptions.link){
             setState(1)
         } else {
-            if(sliderOptions.month === new Date().getMonth() && sliderOptions.year === new Date().getFullYear()){
+            if(dayjs().diff(dayjs(`${sliderOptions.year}-${sliderOptions.month}-01`), 'month', true) < 2){
                 setState(0)
             } else {
                 setState(2)

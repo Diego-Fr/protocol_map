@@ -84,6 +84,35 @@ const colorByClassification = (text) =>{
     }
 }
 
+// const colorByClassificationName = (text) =>{
+//     switch(text){
+//         case 'normal':
+//             return 'rgb(173, 255, 47)'
+//         case 'atenção':
+//             return '#f8f493'
+//         case 'alerta':
+//             return '#fbc091'
+//         case 'crítico':
+//             return '#ffa245'
+//         case 'emergência':
+//             return '#be110c'
+//     }
+// }
+// const colorByClassification = (text) =>{    
+//     switch(text){
+//         case '0':
+//             return 'rgb(173, 255, 47)'
+//         case '1':
+//             return '#f8f493'
+//         case '2':
+//             return '#fbc091'
+//         case '3':
+//             return '#ffa245'
+//         case '4':
+//             return '#be110c'
+//     }
+// }
+
 const indicatorsStages = indicator_name =>{
     switch(indicator_name){
         case 'spi_6':
