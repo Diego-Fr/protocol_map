@@ -78,7 +78,7 @@ const Legend = () =>{
 
     return (
         <div ref={containerRef} className={`${styles.container} ${isMobile ? styles.mob : ''}`}>
-            <div className={styles.title}><div>Estágios de disponibilidade hídrica</div><div className={styles.control} onClick={clickHandler}>{show ? '-' : '+'}</div></div>
+            <div className={styles.title}><div>Legenda</div><div className={styles.control} onClick={clickHandler}>{show ? '-' : '+'}</div></div>
 
             <div ref={wrapperRef} className={styles.wrapper} style={{height: wrapperH }}>
                 {items.map((item, index)=> <div key={index} className={styles.line}><div className={`${styles.square}`} style={{backgroundColor: colorByClassificationName(item.split('-')[1].trim())}}></div><div>{item}</div></div> )}
