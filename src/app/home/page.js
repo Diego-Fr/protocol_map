@@ -47,7 +47,7 @@ export default function Page(){
             </section>
 
             <Based></Based>
-            <FAQ></FAQ>
+            {/* <FAQ></FAQ> */}
             <Footer></Footer>
             
         </>

@@ -26,7 +26,7 @@ const ActionsList = () =>{
     },[sliderOptions])
 
     return( 
-        sidebarOptions.general_status > 2 &&
+        (sidebarOptions.general_status > 2 || actions.length > 0) &&
             <div className={`${styles.container} p-3`}>
                 <div className={`pb-1 mb-2 text-center text-slate-500 ${styles.title}`}>Medidas de Contingência</div>
                 {actions.length > 0 

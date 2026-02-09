@@ -1,3 +1,4 @@
+
 import Image from "next/image";
 import Map from "../components/map/Map";
 import { MapProvider } from "@/providers/MapProvider";
@@ -33,9 +34,10 @@ export default function Home() {
       </MapProvider>
 
         {/* <Modal 
-          header={<div className="flex gap-3"><NotebookText/>Sobre o painel</div>}
+          header={<div className="flex gap-3 items-center"><NotebookText/>Sobre o painel</div>}
           body={
             <AboutModalBody/>
+          
           }
         /> */}
     </div>
