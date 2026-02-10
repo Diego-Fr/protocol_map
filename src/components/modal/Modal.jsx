@@ -2,6 +2,7 @@
 
 import { useState, cloneElement, isValidElement } from 'react'
 import styles from './Modal.module.scss'
+import scrollbarSyles from '@/styles/scrollbar.module.scss'
 
 export default function Modal({header, body}){
 
@@ -11,12 +12,11 @@ export default function Modal({header, body}){
     const outsideClick = () =>{
         console.log('click');
         // setPulse(false)
-        setPulse(false)
-        requestAnimationFrame(_=>setPulse(true))
+        setPulse(true)
     }
 
     const closeModal = _ =>{
-        
+        setShow(false)
     }
 
     return (
@@ -25,9 +25,9 @@ export default function Modal({header, body}){
                 outsideClick();
             }
         }}>
-            <div className={`${styles.contentWrapper} ${pulse ? styles.pulse : ''}`} >
+            <div className={`${styles.contentWrapper} ${pulse ? styles.pulse : ''}`} onAnimationEnd={() => setPulse(false)} >
                 <div className={styles.titleWrapper}>{header}</div>
-                <div className={styles.bodyWrapper}>{ isValidElement(body) ? cloneElement(body, { closeModal }) : body}</div>
+                <div className={`${styles.bodyWrapper} ${scrollbarSyles.customScrollbar}`} >{ isValidElement(body) ? cloneElement(body, { closeModal }) : body}</div>
             </div>
         </div>
     )

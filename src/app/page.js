@@ -33,13 +33,13 @@ export default function Home() {
         
       </MapProvider>
 
-        {/* <Modal 
+        <Modal 
           header={<div className="flex gap-3 items-center"><NotebookText/>Sobre o painel</div>}
           body={
             <AboutModalBody/>
           
           }
-        /> */}
+        />
     </div>
   );
 }

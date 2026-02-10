@@ -9,9 +9,10 @@
     align-items: center;
     justify-content: center;
     display: none;
-
+    
     &.show{
         display: flex;
+        animation: showin 600ms ease forwards;
     }
     
     
@@ -21,9 +22,12 @@
         cursor: auto;
         background-color: white;
         width: 60%;
-        // height: 80%;
+        max-height: 90%;
         border-radius: 20px;
+        overflow: hidden;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        display: flex;
+        flex-direction: column;
 
         &.pulse{
             animation: pulse 600ms;
@@ -34,16 +38,49 @@
             
             font-weight: 600;
             font-size: x-large;
+            flex-shrink: 0;
             // color: rgb(56, 56, 56);
         }
         .bodyWrapper{
+            flex: 1;
             padding: 10px 20px 20px 20px;
+            overflow: auto;
+            // overflow: hidden;
         }
     }
+}
+
+@media screen and (max-width: 1400px){
+    .container{
+        .contentWrapper{
+            width: 80%;
+        }
+    }
+}
+
+
+@media screen and (max-width: 1200px){
+    .container{
+        .contentWrapper{
+            width: 90%;
+        }
+    }
+    
 }
 
 @keyframes pulse {
   0%   { transform: scale(1); }
   50%  { transform: scale(1.01); }
   100% { transform: scale(1); }
+}
+
+@keyframes showin {
+    0%{
+        // transform: scale(0.9);
+        opacity: 0;
+    }
+    100%{
+        // transform: scale(1);
+        opacity: 1;
+    }
 }
