@@ -14,6 +14,7 @@ import { setHighlight, setMapView } from "@/store/mapSlice";
 import { fetchSubugrhis } from "@/utils/fetchData";
 import { setSubugrhis } from "@/store/dataSlice";
 
+
 const Map = () =>{
 
     // const mapRef = useRef(null)

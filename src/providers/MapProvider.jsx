@@ -27,11 +27,12 @@ export function MapProvider({children}){
 
             const L = await import('leaflet')
             await import("leaflet-control-geocoder");
+            await import("../js/TileLayer.Grayscale");
 
             let map = L.map(mapRef.current, {zoomControl: false,attributionControl:false}).setView([-22.55, -48.63], 7);
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key=eyJhbGciOiJIUzI1NiJ9.eyJhIjoiYWNfbzcxcjczZmkiLCJqdGkiOiI4OTc1NTFlOCJ9.QclOKOoNDxd4u5ut320pX72Vc84RdmGGzeaMMbpJqjI', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(map);
+            L.tileLayer.grayscale('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
 
             L.control.zoom({
                 position: 'topright'
