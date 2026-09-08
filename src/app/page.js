@@ -9,6 +9,7 @@ import SearchAddressControl from "@/components/map/components/searchAdress/Searc
 import LocationBox from "@/components/map/components/locationBox/LocationBox";
 import Logo from "@/components/map/components/logo/Logo";
 import Title from "@/components/map/components/title/Title";
+import DateTitle from "@/components/map/components/dateTitle/DateTitle";
 import CenterButton from "@/components/map/components/centerButton/centerButton";
 import Modal from "@/components/modal/Modal";
 import AboutModalBody from "@/components/about_modal/AboutModalBody";
@@ -24,6 +25,7 @@ export default function Home() {
         <SidebarInfo/>
         <Slider/>
         <Title/>
+        <DateTitle/>
         <Logo></Logo>
         
         <SearchAddressControl></SearchAddressControl>

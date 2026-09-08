@@ -1,0 +1,72 @@
+.wrapper {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    pointer-events: none;
+
+    // empilha os labels na mesma célula durante a troca (sem "pulo" de layout)
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    padding-bottom: 4px;
+
+    &.hidden {
+        display: none;
+    }
+
+    .label {
+        grid-area: 1 / 1;
+        padding: 6px 20px;
+        background-color: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(2px);
+        border-radius: 999px;
+        box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 8px;
+        color: #44403c; // stone-700
+        font-weight: 600;
+        font-size: 1.10rem;
+        letter-spacing: 0.02em;
+        text-transform: capitalize;
+        white-space: nowrap;
+    }
+
+    // novo valor entra de baixo pra cima
+    .enter {
+        animation: dateTitleIn 0.4s ease forwards;
+    }
+
+    // valor antigo sai pra cima
+    .exit {
+        animation: dateTitleOut 0.4s ease forwards;
+    }
+}
+
+@keyframes dateTitleIn {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes dateTitleOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-14px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .wrapper .enter,
+    .wrapper .exit {
+        animation-duration: 0.01ms;
+    }
+}
