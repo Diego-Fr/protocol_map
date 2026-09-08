@@ -5,17 +5,7 @@ import { useSelector } from 'react-redux'
 import styles from './DateTitle.module.scss'
 import { useMap } from '@/providers/MapProvider'
 import { useIsMobile } from '@/hooks/useIsMobile'
-
-const MONTHS = [
-    'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho',
-    'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'
-]
-
-// mes_por_extenso/YYYY -> ex.: "setembro/2025"
-const formatLabel = (year, month) => {
-    if (!year || !month || !MONTHS[month - 1]) return ''
-    return `${MONTHS[month - 1]}/${year}`
-}
+import { formatMonthLabel } from '@/helpers/monthsHelper'
 
 const DateTitle = () => {
     const { mapRef } = useMap()
@@ -23,7 +13,7 @@ const DateTitle = () => {
     const isMobile = useIsMobile()
 
     const { year, month } = useSelector(state => state.slider)
-    const label = formatLabel(year, month)
+    const label = formatMonthLabel(year, month)
 
     // label atual em exibição e o que está saindo (para a animação de troca)
     const [current, setCurrent] = useState(label)

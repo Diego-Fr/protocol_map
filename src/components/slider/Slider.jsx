@@ -2,12 +2,14 @@
 import styles from './Slider.module.scss'
 
 import { useMap } from "@/providers/MapProvider"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import { format, addMonths, differenceInDays } from 'date-fns';
 import { useDispatch } from 'react-redux';
 import { setDate } from '@/store/sliderSlice';
 import { Calendar } from 'lucide-react';
 import { useIsMobile } from '@/hooks/useIsMobile';
+import { formatMonthLabel } from '@/helpers/monthsHelper';
+import MonthList from './components/MonthList/MonthList';
 
 const Slider = () =>{
     const {map, L, mapRef} = useMap()
@@ -21,6 +23,8 @@ const Slider = () =>{
     const selectedMonth = useRef(null)
     const [block, setBlock] = useState(false)
     const [firstLoad, setFirstLoad] = useState(false)
+    const [monthListOpen, setMonthListOpen] = useState(false)
+    const currentDateRef = useRef()
 
     const radius = 15;
     const buffer = 15;
@@ -76,10 +80,32 @@ const Slider = () =>{
         dispatch(setDate({year: date.getFullYear(), month: date.getMonth() +1}))
     }
 
-    const getDateFromMonthsNumber = number =>{        
+    const getDateFromMonthsNumber = number =>{
         return addMonths(new Date(2025, 7, 1), months - number)
     }
-    
+
+    // meses disponiveis para analise: do mes atual (number 0) ate 'months' meses atras
+    const availableMonths = useMemo(() => (
+        Array.from({ length: months + 1 }, (_, i) => {
+            const date = getDateFromMonthsNumber(i)
+            const year = date.getFullYear()
+            const month = date.getMonth() + 1
+            return { number: i, year, month, label: formatMonthLabel(year, month) }
+        })
+    ), [])
+
+    const handleMonthSelect = item =>{
+        const rect = containerRef.current?.getBoundingClientRect()
+        if(rect){
+            const step = rect.width / months
+            setPosition({ x: item.number * step })
+        }
+        selectedMonth.current = item.number
+        setSliderOptions(state => ({ ...state, selectedYear: item.year, selectedMonth: item.month }))
+        dispatch(setDate({ year: item.year, month: item.month }))
+        setMonthListOpen(false)
+    }
+
 
     useEffect(_=>{
         // containerRef.current = document.createElement('div')
@@ -130,14 +156,33 @@ const Slider = () =>{
     // },[map])
 
     useEffect(_=>{
-        if(!L || !wrapperRef.current) return ;
-        // L.DomEvent.disableClickPropagation(wrapperRef.current)
-        // L.DomEvent.disableScrollPropagation(wrapperRef.current);
-        // L.DomEvent.disableClickPropagation(containerRef.current)
-        // L.DomEvent.disableScrollPropagation(containerRef.current);
-        // L.DomEvent.disableClickPropagation(controlRef.current)
-        // L.DomEvent.disableScrollPropagation(controlRef.current);
+        if(!L || !currentDateRef.current) return ;
+        // clique no indicador nao dispara click/drag do mapa
+        L.DomEvent.disableClickPropagation(currentDateRef.current)
+        L.DomEvent.disableScrollPropagation(currentDateRef.current)
     },[L])
+
+    // fecha a lista de meses ao clicar fora / apertar Esc
+    useEffect(_=>{
+        if(!monthListOpen) return ;
+
+        const onDown = e =>{
+            if(currentDateRef.current && !currentDateRef.current.contains(e.target)){
+                setMonthListOpen(false)
+            }
+        }
+        const onKey = e =>{
+            if(e.key === 'Escape') setMonthListOpen(false)
+        }
+
+        document.addEventListener('mousedown', onDown)
+        document.addEventListener('keydown', onKey)
+
+        return _ =>{
+            document.removeEventListener('mousedown', onDown)
+            document.removeEventListener('keydown', onKey)
+        }
+    },[monthListOpen])
 
     return (
         <div className={`${styles.wrapper} ${isMobile ? styles.mobile : ''}`} ref={wrapperRef}>
@@ -146,8 +191,23 @@ const Slider = () =>{
                 <div className={styles.control} ref={controlRef} onMouseDown={handleCircleClick} style={{right: position.x-radius, width: radius*2, height: radius*2, transform: `translateY(-${radius+4}px)` }}></div>
 
             </div>
-            <div className={`${styles.currentDate} font-semibold text-stone-700`}><span className='pr-3'>{sliderOptions.selectedMonth.toFixed(0).padStart(2, 0)}-{sliderOptions.selectedYear} </span><Calendar></Calendar></div>
-            
+            <div
+                ref={currentDateRef}
+                className={`${styles.currentDate} ${monthListOpen ? styles.open : ''} font-semibold text-stone-700`}
+                onClick={_=> setMonthListOpen(open => !open)}
+            >
+                <span className='pr-3'>{sliderOptions.selectedMonth.toFixed(0).padStart(2, 0)}-{sliderOptions.selectedYear} </span>
+                <Calendar></Calendar>
+
+                {monthListOpen && (
+                    <MonthList
+                        items={availableMonths}
+                        selected={{ year: sliderOptions.selectedYear, month: sliderOptions.selectedMonth }}
+                        onSelect={handleMonthSelect}
+                    />
+                )}
+            </div>
+
         </div>
     )
 }
