@@ -149,7 +149,7 @@ const Map = () =>{
 
     useEffect(_=>{
         if(!firstLoad){
-            dispatch(setDate({year: 2026, month: 8}))
+            dispatch(setDate({year: 2026, month: 9}))
             setFirstLoad(true)
             fetchSubugrhis().then(data=>{
                 dispatch(setSubugrhis(data))
